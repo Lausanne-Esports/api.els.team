@@ -11,12 +11,14 @@
 |
 */
 
-// const Factory = use('Factory')
+const Factory = use('Factory')
 
-/**
-  Factory.blueprint('App/Models/User', (faker) => {
-    return {
-      username: faker.username()
-    }
-  })
-*/
+Factory.blueprint('App/Models/User', (faker, index, data) => {
+  const defaultValue = {
+    username: faker.username(),
+    email: faker.email(),
+    password: 'secret',
+  }
+
+  return Object.assign(defaultValue, data)
+})

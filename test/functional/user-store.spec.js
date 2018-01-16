@@ -1,0 +1,203 @@
+'use strict'
+
+const Factory = use('Factory')
+const User = use('App/Models/User')
+const { test, trait } = use('Test/Suite')('User Store')
+
+trait('Test/ApiClient')
+trait('DatabaseTransactions')
+
+test('should be able to register with valid data', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+      password: 'secret',
+      password_confirmation: 'secret',
+    })
+    .end()
+
+  response.assertStatus(200)
+  response.assertJSONSubset({
+    user: {
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+    }
+  })
+})
+
+test('should test that password must match', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+      password: 'secret',
+      password_confirmation: 'secret2',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'password_confirmation' },
+      title: 'same',
+    }]
+  })
+})
+
+test('should test that password is required', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'password' },
+      title: 'required',
+    }]
+  })
+})
+
+test('should test that password_confirmation is required', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+      password: 'secret',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'password_confirmation' },
+      title: 'required_if',
+    }]
+  })
+})
+
+test('should test that username is required', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      email: 'romain.lanz@lausanne-esports.ch',
+      password: 'secret',
+      password_confirmation: 'secret',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'username' },
+      title: 'required',
+    }]
+  })
+})
+
+test('should test that username must be unique', async ({ assert, client }) => {
+  await Factory.model('App/Models/User').create({ username: 'romain.lanz' })
+
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+      password: 'secret',
+      password_confirmation: 'secret',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'username' },
+      title: 'unique',
+    }]
+  })
+})
+
+test('should test that email is required', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      password: 'secret',
+      password_confirmation: 'secret',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'email' },
+      title: 'required',
+    }]
+  })
+})
+
+test('should test that email must be correctly formated', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain-esports.ch',
+      password: 'secret',
+      password_confirmation: 'secret',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'email' },
+      title: 'email',
+    }]
+  })
+})
+
+test('should test that email must be unique', async ({ assert, client }) => {
+  await Factory.model('App/Models/User').create({ email: 'romain.lanz@lausanne-esports.ch' })
+
+  const response = await client
+    .post('users')
+    .send({
+      username: 'romain.lanz',
+      email: 'romain.lanz@lausanne-esports.ch',
+      password: 'secret',
+      password_confirmation: 'secret',
+    })
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [{
+      source: { pointer: 'email' },
+      title: 'unique',
+    }]
+  })
+})
+
+test('should test that all errors are sent back', async ({ assert, client }) => {
+  const response = await client
+    .post('users')
+    .send({})
+    .end()
+
+  response.assertStatus(400)
+  response.assertJSONSubset({
+    errors: [
+      { source: { pointer: 'username' }, title: 'required' },
+      { source: { pointer: 'email' }, title: 'required' },
+      { source: { pointer: 'password' }, title: 'required' },
+    ]
+  })
+})
