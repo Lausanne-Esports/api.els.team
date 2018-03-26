@@ -22,3 +22,10 @@ Factory.blueprint('App/Models/User', (faker, index, data) => {
 
   return Object.assign(defaultValue, data)
 })
+
+Factory.blueprint('App/Models/Article', (faker, index, data) => {
+  const defaultValue = {
+  }
+
+  return Object.assign(defaultValue, data)
+})
