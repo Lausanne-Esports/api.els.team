@@ -1,8 +1,10 @@
 'use strict'
 
+const { formatters } = use('Validator')
+
 class SessionStore {
   get formatter () {
-    return 'jsonapi'
+    return formatters.JsonApi
   }
 
   get validateAll () {

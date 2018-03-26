@@ -1,12 +1,14 @@
 'use strict'
 
+const BaseExceptionHandler = use('BaseExceptionHandler')
+
 /**
  * This class handles all exceptions thrown during
  * the HTTP request lifecycle.
  *
  * @class ExceptionHandler
  */
-class ExceptionHandler {
+class ExceptionHandler extends BaseExceptionHandler {
   /**
    * Handle exception thrown during the HTTP lifecycle
    *
@@ -19,13 +21,17 @@ class ExceptionHandler {
    * @return {void}
    */
   async handle (error, { request, response }) {
-    response.status(error.status).send({
-      errors: [{
-        "status": error.status,
-        "code": error.code,
-        "detail": error.message,
-      }]
-    })
+    if (error.code === 'E_INVALID_CREDENTIAL') {
+       return response.status(error.status).send({
+        errors: [{
+          "status": error.status,
+          "code": error.code,
+          "detail": error.message,
+        }]
+      })
+    }
+
+    return super.handle(...arguments)
   }
 
   /**

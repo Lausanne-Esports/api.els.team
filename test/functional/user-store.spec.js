@@ -79,7 +79,7 @@ test('should test that password_confirmation is required', async ({ assert, clie
   response.assertJSONSubset({
     errors: [{
       source: { pointer: 'password_confirmation' },
-      title: 'required_if',
+      title: 'requiredIf',
     }]
   })
 })
