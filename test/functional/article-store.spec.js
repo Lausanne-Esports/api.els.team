@@ -8,9 +8,11 @@
  */
 
 const Factory = use('Factory')
-const { test, trait } = use('Test/Suite')('Article Store')
+const { before, test, trait } = use('Test/Suite')('Article Store')
 const { testRequireField, testNumberField } = require('../helpers')
+let user = null
 
+trait('Auth/Client')
 trait('Test/ApiClient')
 trait('DatabaseTransactions')
 
@@ -25,22 +27,27 @@ const article = {
   language_id: 2,
 }
 
+before(async () => {
+  user = await Factory.model('App/Models/User').create()
+})
+
 test('should be able to create article with valid data', async ({ assert, client }) => {
   const response = await client
     .post('articles')
+    .loginVia(user, 'jwt')
     .send(article)
     .end()
 
   response.assertStatus(200)
   response.assertJSONSubset({
-    category_id: 1,
-    template_id: 1,
+    category_id: article.category_id,
+    template_id: article.template_id,
     translations: [{
-      headline: 'My First Article',
-      description: '',
-      body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit veritatis rerum amet odio nostrum perferendis neque, vitae impedit aspernatur placeat?',
-      state_id: 1,
-      language_id: 2,
+      headline: article.headline,
+      description: article.description,
+      body: article.body,
+      state_id: article.state_id,
+      language_id: article.language_id,
     }]
   })
 })
@@ -50,6 +57,7 @@ test('should be able to translate an existing article', async ({ assert, client 
 
   const response = await client
     .post(`articles/${article.id}/translations`)
+    .loginVia(user, 'jwt')
     .send({
       headline: 'Mon premier article',
       description: '',
@@ -59,11 +67,11 @@ test('should be able to translate an existing article', async ({ assert, client 
     })
     .end()
 
-  // response.assertStatus(200)
+  response.assertStatus(200)
   response.assertJSONSubset({
     id: article.id,
-    category_id: 1,
-    template_id: 1,
+    category_id: article.category_id,
+    template_id: article.template_id,
     translations: [{
       headline: 'Mon premier article',
       description: '',
@@ -82,6 +90,7 @@ test('shouldn\'t be able to translate an article twice in the same language', as
 
   const response = await client
     .post(`articles/${article.id}/translations`)
+    .loginVia(user, 'jwt')
     .send({
       headline: 'Mon premier article',
       description: '',
@@ -94,13 +103,13 @@ test('shouldn\'t be able to translate an article twice in the same language', as
   response.assertStatus(400)
 })
 
-testRequireField(test, 'body', article, 'articles')
-testRequireField(test, 'headline', article, 'articles')
-testNumberField(test, 'language_id', article, 'articles')
-testRequireField(test, 'language_id', article, 'articles')
-testNumberField(test, 'state_id', article, 'articles')
-testRequireField(test, 'state_id', article, 'articles')
-testNumberField(test, 'template_id', article, 'articles')
-testRequireField(test, 'template_id', article, 'articles')
-testNumberField(test, 'category_id', article, 'articles')
-testRequireField(test, 'category_id', article, 'articles')
+testRequireField(test, 'body', article, 'articles', user)
+testRequireField(test, 'headline', article, 'articles', user)
+testNumberField(test, 'language_id', article, 'articles', user)
+testRequireField(test, 'language_id', article, 'articles', user)
+testNumberField(test, 'state_id', article, 'articles', user)
+testRequireField(test, 'state_id', article, 'articles', user)
+testNumberField(test, 'template_id', article, 'articles', user)
+testRequireField(test, 'template_id', article, 'articles', user)
+testNumberField(test, 'category_id', article, 'articles', user)
+testRequireField(test, 'category_id', article, 'articles', user)
