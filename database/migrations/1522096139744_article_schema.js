@@ -12,7 +12,6 @@ class ArticleSchema extends Schema {
       table.dateTime('published_at').defaultTo(this.fn.now())
 
       table.integer('template_id').unsigned().notNullable().defaultTo(0)
-      table.integer('state_id').unsigned().notNullable().defaultTo(0)
       table.integer('category_id').unsigned().notNullable().defaultTo(0)
     })
 
@@ -20,12 +19,13 @@ class ArticleSchema extends Schema {
       table.increments()
       table.timestamps()
 
-      table.string('headline')
+      table.string('headline').notNullable()
       table.text('description')
-      table.text('body')
+      table.text('body').notNullable()
 
       table.integer('view_count').unsigned().notNullable().defaultTo(0)
       table.integer('article_id').unsigned().notNullable()
+      table.integer('state_id').unsigned().notNullable().defaultTo(0)
       table.integer('language_id').unsigned().notNullable()
     })
 
