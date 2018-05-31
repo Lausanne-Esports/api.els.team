@@ -29,12 +29,15 @@ class ArticleController {
     const metadata = this.$getMetadata(request)
     const translation = this.$getTranslationData(request)
 
-    const trx = await Database.beginTransaction()
+    const globalTrx = Database.connection('mysql')._globalTrx
+    const trx =  globalTrx ? globalTrx : await Database.beginTransaction()
 
     const article = await Article.create(metadata, trx)
     await article.translations().create(translation, trx)
 
-    trx.commit()
+    if (!globalTrx) {
+      trx.commit()
+    }
 
     await article.load('translations')
 

@@ -8,7 +8,7 @@
  */
 
 const Factory = use('Factory')
-const { before, test, trait } = use('Test/Suite')('Article Store')
+const { after, before, test, trait } = use('Test/Suite')('Article Store')
 const { testRequireField, testNumberField } = require('../helpers')
 let user = null
 
@@ -103,13 +103,42 @@ test('shouldn\'t be able to translate an article twice in the same language', as
   response.assertStatus(400)
 })
 
-testRequireField(test, 'body', article, 'articles', user)
-testRequireField(test, 'headline', article, 'articles', user)
-testNumberField(test, 'language_id', article, 'articles', user)
-testRequireField(test, 'language_id', article, 'articles', user)
-testNumberField(test, 'state_id', article, 'articles', user)
-testRequireField(test, 'state_id', article, 'articles', user)
-testNumberField(test, 'template_id', article, 'articles', user)
-testRequireField(test, 'template_id', article, 'articles', user)
-testNumberField(test, 'category_id', article, 'articles', user)
-testRequireField(test, 'category_id', article, 'articles', user)
+test(`should test that body is required`, async ({ assert, client }) => {
+  testRequireField('body', article, 'articles', user, assert, client)
+})
+
+test(`should test that headline is required`, async ({ assert, client }) => {
+  testRequireField('headline', article, 'articles', user, assert, client)
+})
+
+test(`should test that language_id is required`, async ({ assert, client }) => {
+  testRequireField('language_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that state_id is required`, async ({ assert, client }) => {
+  testRequireField('state_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that template_id is required`, async ({ assert, client }) => {
+  testRequireField('template_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that category_id is required`, async ({ assert, client }) => {
+  testRequireField('category_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that language_id must be a number`, async ({ assert, client }) => {
+  testNumberField('language_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that state_id must be a number`, async ({ assert, client }) => {
+  testNumberField('state_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that template_id must be a number`, async ({ assert, client }) => {
+  testNumberField('template_id', article, 'articles', user, assert, client)
+})
+
+test(`should test that category_id must be a number`, async ({ assert, client }) => {
+  testNumberField('category_id', article, 'articles', user, assert, client)
+})
