@@ -12,7 +12,7 @@ const Article = use('App/Models/Article')
 const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
 class ArticleController {
-  async show ({ params, response }) {
+  async show ({ params }) {
     const article = await Article.findOrFail(params.id)
     await article.load('translations', (builder) => {
       builder.where('state_id', 4)
