@@ -13,6 +13,7 @@ const Server = use('Server')
 */
 const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
+  'Adonis/Middleware/Session',
   'App/Middleware/ForceJson',
 ]
 

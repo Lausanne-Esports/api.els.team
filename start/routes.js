@@ -11,4 +11,4 @@ Route.get('articles/:id', 'ArticleController.show')
 Route.group(() => {
  Route.post('articles', 'ArticleController.store').validator('ArticleStore')
  Route.post('articles/:id/translations', 'ArticleTranslationController.store').validator('ArticleTranslationStore')
-}).middleware('auth:jwt')
+}).middleware('auth')

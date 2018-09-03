@@ -7,7 +7,7 @@ module.exports = async function testNumberField (field, data, endpoint, user, as
 
   const response = await client
     .post(endpoint)
-    .loginVia(user, 'jwt')
+    .loginVia(user)
     .send(data)
     .end()
 

@@ -8,11 +8,12 @@
  */
 
 const Factory = use('Factory')
-const { after, before, test, trait } = use('Test/Suite')('Article Store')
+const { before, test, trait } = use('Test/Suite')('Article Store')
 const { testRequireField, testNumberField } = require('../helpers')
 let user = null
 
 trait('Auth/Client')
+trait('Session/Client')
 trait('Test/ApiClient')
 trait('DatabaseTransactions')
 
@@ -34,7 +35,7 @@ before(async () => {
 test('should be able to create article with valid data', async ({ assert, client }) => {
   const response = await client
     .post('articles')
-    .loginVia(user, 'jwt')
+    .loginVia(user)
     .send(article)
     .end()
 
@@ -57,7 +58,7 @@ test('should be able to translate an existing article', async ({ assert, client 
 
   const response = await client
     .post(`articles/${article.id}/translations`)
-    .loginVia(user, 'jwt')
+    .loginVia(user)
     .send({
       headline: 'Mon premier article',
       description: '',
@@ -90,7 +91,7 @@ test('shouldn\'t be able to translate an article twice in the same language', as
 
   const response = await client
     .post(`articles/${article.id}/translations`)
-    .loginVia(user, 'jwt')
+    .loginVia(user)
     .send({
       headline: 'Mon premier article',
       description: '',

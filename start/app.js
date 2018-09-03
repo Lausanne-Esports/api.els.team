@@ -20,6 +20,7 @@ const providers = [
   '@adonisjs/lucid/providers/LucidProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/vow/providers/VowProvider',
+  '@adonisjs/session/providers/SessionProvider',
 
   join(__dirname, '../providers/HashidsProvider'),
 ]

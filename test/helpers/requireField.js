@@ -5,7 +5,7 @@ const _ = require('lodash')
 module.exports = async function testRequireField (field, data, endpoint, user, assert, client) {
   const response = await client
     .post(endpoint)
-    .loginVia(user, 'jwt')
+    .loginVia(user)
     .send(_.omit(data, [field]))
     .end()
 
