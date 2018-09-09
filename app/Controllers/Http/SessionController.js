@@ -17,6 +17,15 @@ class SessionController {
       message: 'Logged in successfully',
     })
   }
+
+  async destroy ({ auth, response }) {
+    await auth.logout()
+
+    return response.ok({
+      status: 200,
+      message: 'Logged out successfully',
+    })
+  }
 }
 
 module.exports = SessionController

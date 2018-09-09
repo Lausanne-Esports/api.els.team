@@ -43,3 +43,14 @@ Factory.blueprint('App/Models/ArticleTranslation', (faker, index, data) => {
 
   return Object.assign(defaultValue, data)
 })
+
+Factory.blueprint('App/Models/ArticleCategory', (faker, index, data) => {
+  const word = faker.word()
+
+  const defaultValue = {
+    name: word,
+    code: word,
+  }
+
+  return Object.assign(defaultValue, data)
+})

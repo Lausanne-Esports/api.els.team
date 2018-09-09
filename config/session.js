@@ -65,6 +65,7 @@ module.exports = {
   cookie: {
     httpOnly: true,
     path: '/',
+    domain: 'els.team',
     sameSite: false
   },
 

@@ -9,7 +9,6 @@
 
 const Factory = use('Factory')
 const { test, trait } = use('Test/Suite')('Article Get')
-const { testRequireField, testNumberField } = require('../helpers')
 
 trait('Test/ApiClient')
 trait('DatabaseTransactions')

@@ -8,6 +8,8 @@ class ArticleSchema extends Schema {
       table.increments()
       table.timestamps()
 
+      table.string('thumbnail')
+      table.string('featured_thumbnail')
       table.boolean('featured').notNullable().defaultTo(false)
       table.dateTime('published_at').defaultTo(this.fn.now())
 
@@ -57,7 +59,7 @@ class ArticleSchema extends Schema {
 
     this.schedule(async () => {
       const ace = require('@adonisjs/ace')
-      await ace.call('seed', { files: ['LanguageSeed', 'ArticleTemplateSeed', 'ArticleStateSeed', 'ArticleCategorySeed'] })
+      await ace.call('seed', {}, { files: ['LanguageSeeder.js', 'ArticleTemplateSeeder.js', 'ArticleStateSeeder.js', 'ArticleCategorySeeder.js'].join(',') })
     })
   }
 

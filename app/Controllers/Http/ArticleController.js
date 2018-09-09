@@ -44,16 +44,10 @@ class ArticleController {
     return article
   }
 
-  $getFormField (request) {
-    return request.only([
-      'headline', 'description', 'body', 'published_at',
-      'template_id', 'state_id', 'category_id', 'language_id',
-    ])
-  }
-
   $getMetadata (request) {
     return request.only([
-      'published_at', 'template_id', 'category_id'
+      'thumbnail', 'thumbnail_featured',
+      'published_at', 'template_id', 'category_id',
     ])
   }
 

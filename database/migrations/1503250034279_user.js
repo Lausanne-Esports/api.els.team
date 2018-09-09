@@ -11,6 +11,11 @@ class UserSchema extends Schema {
       table.string('password', 60).notNullable()
       table.timestamps()
     })
+
+    this.schedule(async () => {
+      const ace = require('@adonisjs/ace')
+      await ace.call('seed', {}, { files: 'UserSeeder.js' })
+    })
   }
 
   down () {

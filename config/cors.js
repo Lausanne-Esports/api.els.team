@@ -16,7 +16,13 @@ module.exports = {
   | Function - Receives the current origin and should return one of the above values.
   |
   */
-  origin: ['els.team', 'admin.els.team'],
+  origin: (origin) => {
+    if (origin.includes('els.team')) {
+      return true
+    }
+
+    return false
+  },
 
   /*
   |--------------------------------------------------------------------------
@@ -73,7 +79,7 @@ module.exports = {
   | boolean.
   |
   */
-  credentials: false,
+  credentials: true,
 
   /*
   |--------------------------------------------------------------------------
