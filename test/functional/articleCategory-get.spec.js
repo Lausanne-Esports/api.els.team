@@ -14,9 +14,9 @@ test('should be able to have all categories', async ({ assert, client }) => {
     .end()
 
     response.assertStatus(200)
-    response.assertJSONSubset({
+    response.assertJSONSubset([{
       id: category.id,
       name: category.name,
       code: category.code,
-    })
+    }])
 })
