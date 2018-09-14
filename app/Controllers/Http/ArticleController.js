@@ -18,10 +18,11 @@ class ArticleController {
       .has('translations', (builder) => {
         builder.where('state_id', 4)
       })
-      .with('translations', (builder) => {
-        builder.where('state_id', 4)
-      })
       .with('translations.language')
+      .with('translations', (builder) => {
+        builder.select(['headline', 'state_id', 'language_id', 'article_id'])
+          .where('state_id', 4)
+      })
       .with('category')
       .fetch()
 
