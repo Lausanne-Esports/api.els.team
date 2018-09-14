@@ -23,6 +23,7 @@ const providers = [
   '@adonisjs/session/providers/SessionProvider',
 
   join(__dirname, '../providers/HashidsProvider'),
+  join(__dirname, '../providers/Markdown/MarkdownProvider'),
 ]
 
 /*

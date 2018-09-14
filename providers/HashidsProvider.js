@@ -14,6 +14,7 @@ class HashidsProvider extends ServiceProvider {
   register () {
      this.app.singleton('Hashids', () => {
        const Env = this.app.use('Env')
+
        return new Hashids(Env.get('APP_KEY'), 10)
      })
   }

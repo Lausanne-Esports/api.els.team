@@ -7,7 +7,8 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Database = use('Database')
+const Hashids = use('Hashids')
+const Markdown = use('Markdown')
 const Article = use('App/Models/Article')
 const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
@@ -28,14 +29,21 @@ class ArticleController {
   }
 
   async show ({ params }) {
-    const article = await Article.findOrFail(params.id)
+    let article = await Article.findOrFail(Hashids.decode(params.id))
+
     await article.load('translations', (builder) => {
       builder.where('state_id', 4)
     })
 
-    if (article.toJSON().translations.length <= 0) {
+    article = article.toJSON()
+
+    if (article.translations.length <= 0) {
       throw new ModelNotFound()
     }
+
+    article.translations.forEach(async (translation) => {
+      translation.body = await Markdown.renderToHtml(translation.body)
+    })
 
     return article
   }

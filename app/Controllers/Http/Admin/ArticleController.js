@@ -7,9 +7,9 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
+const Hashids = use('Hashids')
 const Database = use('Database')
 const Article = use('App/Models/Article')
-const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
 class ArticleController {
   async index () {
@@ -22,7 +22,9 @@ class ArticleController {
   }
 
   async show ({ params }) {
-    return Article.findOrFail(params.id)
+    return Article.findOrFail(
+      Hashids.decode(params.id)
+    )
   }
 
   async store ({ request }) {
@@ -47,7 +49,7 @@ class ArticleController {
   async update ({ params, request }) {
     const metadata = this.$getMetadata(request)
 
-    const article = await Article.findOrFail(params.id)
+    const article = await Article.findOrFail(Hashids.decode(params.id))
     article.merge(metadata)
     await article.save()
 
