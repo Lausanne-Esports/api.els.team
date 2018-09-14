@@ -5,7 +5,10 @@ const Translation = use('App/Models/ArticleTranslation')
 
 class ArticleTranslationController {
   async show ({ params }) {
-    const translation = await Translation.findOrFail(params.id)
+    const translation = await Translation.query()
+      .where('id', params.id)
+      .with('language')
+      .first()
 
     return translation
   }
@@ -35,6 +38,12 @@ class ArticleTranslationController {
     await translation.save()
 
     return translation
+  }
+
+  async destroy ({ params, response }) {
+    await Translation.query().where('id', params.id).delete()
+
+    return response.noContent()
   }
 
   $getFormField (request) {

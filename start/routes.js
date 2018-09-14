@@ -27,6 +27,7 @@ Route.group(() => {
   Route.put('articles/:id', 'ArticleController.update')
   Route.put('translations/:id', 'ArticleTranslationController.update')
 
+  Route.delete('translations/:id', 'ArticleTranslationController.destroy')
   Route.get('translations/:id', 'ArticleTranslationController.show')
   Route.post('articles/:id/translations', 'ArticleTranslationController.store').validator('ArticleTranslationStore')
 }).middleware('auth').prefix('admin').namespace('Admin')
