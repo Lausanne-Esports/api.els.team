@@ -9,6 +9,8 @@
 
 const Hashids = use('Hashids')
 const Database = use('Database')
+
+/** @type {typeof import('../../../Models/Article')} */
 const Article = use('App/Models/Article')
 
 class ArticleController {

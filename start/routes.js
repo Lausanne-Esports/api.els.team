@@ -1,5 +1,6 @@
 'use strict'
 
+/** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
 Route.get('users', 'UserController.index')
@@ -11,7 +12,6 @@ Route.get('articles/templates', 'ArticleTemplateController.index')
 Route.get('articles/categories', 'ArticleCategoryController.index')
 Route.get('articles/:id', 'ArticleController.show')
 Route.get('articles', 'ArticleController.index')
-
 
 Route.group(() => {
   Route.get('me', 'UserController.current')

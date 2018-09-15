@@ -1,5 +1,6 @@
 'use strict'
 
+/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 const Hashids = use('Hashids')
 const moment = require('moment')

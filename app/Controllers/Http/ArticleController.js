@@ -26,7 +26,9 @@ class ArticleController {
       .with('category')
       .fetch()
 
-    return articles
+    // TODO: Verify why the `.has()` method hasn't work to remove
+    // article without any translations
+    return articles.toJSON().filter(a => a.translations.length > 0)
   }
 
   async show ({ params }) {
