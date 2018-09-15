@@ -9,6 +9,10 @@ class UserController {
     return users
   }
 
+  async current ({ auth }) {
+    return auth.user
+  }
+
   async store ({ request, response }) {
     const data = request.only([
       'username', 'email', 'password', 'password_confirmation']

@@ -1,5 +1,7 @@
 'use strict'
 
+const Env = use('Env')
+
 module.exports = {
   /*
   |--------------------------------------------------------------------------
@@ -13,7 +15,7 @@ module.exports = {
   | Available Serializers - lucid, database
   |
   */
-  authenticator: 'jwt',
+  authenticator: 'session',
 
   /*
   |--------------------------------------------------------------------------
@@ -69,7 +71,7 @@ module.exports = {
     uid: 'email',
     password: 'password',
     options: {
-      secret: 'self::app.appKey'
+      secret: Env.get('APP_KEY'),
     }
   }
 }
