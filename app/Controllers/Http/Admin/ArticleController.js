@@ -30,7 +30,7 @@ class ArticleController {
     const metadata = this.$getMetadata(request)
     const translation = this.$getTranslationData(request)
 
-    const globalTrx = Database.connection('mysql')._globalTrx
+    const globalTrx = Database.connection('pg')._globalTrx
     const trx =  globalTrx ? globalTrx : await Database.beginTransaction()
 
     const article = await Article.create(metadata, trx)
