@@ -2,7 +2,6 @@
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
-const Hashids = use('Hashids')
 const moment = require('moment')
 
 class Article extends Model {
@@ -10,10 +9,6 @@ class Article extends Model {
     return super.dates.concat([
       'published_at',
     ])
-  }
-
-  getId (id) {
-    return Hashids.encode(id)
   }
 
   static formatDates (field, value) {

@@ -7,7 +7,6 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Hashids = use('Hashids')
 const Markdown = use('Markdown')
 const Article = use('App/Models/Article')
 const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
@@ -32,7 +31,7 @@ class ArticleController {
   }
 
   async show ({ params }) {
-    let article = await Article.findOrFail(Hashids.decode(params.id))
+    let article = await Article.findOrFail(params.id)
 
     await article.load('translations', (builder) => {
       builder.where('state_id', 4)

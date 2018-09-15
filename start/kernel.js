@@ -15,6 +15,7 @@ const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
   'Adonis/Middleware/Session',
   'App/Middleware/ForceJson',
+  'App/Middleware/ConvertEmptyStringsToNull',
 ]
 
 /*

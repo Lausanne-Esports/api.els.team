@@ -10,7 +10,6 @@
 |
 */
 
-const Factory = use('Factory')
 const ArticleCategory = use('App/Models/ArticleCategory')
 
 class ArticleCategorySeeder {

@@ -7,7 +7,6 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Hashids = use('Hashids')
 const Database = use('Database')
 
 /** @type {typeof import('../../../Models/Article')} */
@@ -24,9 +23,7 @@ class ArticleController {
   }
 
   async show ({ params }) {
-    return Article.findOrFail(
-      Hashids.decode(params.id)
-    )
+    return Article.findOrFail(params.id)
   }
 
   async store ({ request }) {
@@ -51,7 +48,7 @@ class ArticleController {
   async update ({ params, request }) {
     const metadata = this.$getMetadata(request)
 
-    const article = await Article.findOrFail(Hashids.decode(params.id))
+    const article = await Article.findOrFail(params.id)
     article.merge(metadata)
     await article.save()
 

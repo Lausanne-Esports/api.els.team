@@ -56,11 +56,6 @@ class ArticleSchema extends Schema {
       table.string('name')
       table.string('code')
     })
-
-    this.schedule(async () => {
-      const ace = require('@adonisjs/ace')
-      await ace.call('seed', {}, { files: ['LanguageSeeder.js', 'ArticleTemplateSeeder.js', 'ArticleStateSeeder.js', 'ArticleCategorySeeder.js'].join(',') })
-    })
   }
 
   down () {

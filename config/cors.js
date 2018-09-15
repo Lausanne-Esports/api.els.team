@@ -17,6 +17,10 @@ module.exports = {
   |
   */
   origin: (origin) => {
+    if (process.env.NODE_ENV === 'development') {
+      return true
+    }
+
     if (origin.includes('els.team')) {
       return true
     }
