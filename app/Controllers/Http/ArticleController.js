@@ -14,7 +14,7 @@ const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 class ArticleController {
   async index ({ auth, request }) {
     const articles = await Article.query()
-      .has('translations', (builder) => {
+      .whereHas('translations', (builder) => {
         builder.where('state_id', 4)
       })
       .with('translations.language')
@@ -25,9 +25,7 @@ class ArticleController {
       .with('category')
       .fetch()
 
-    // TODO: Verify why the `.has()` method hasn't work to remove
-    // article without any translations
-    return articles.toJSON().filter(a => a.translations.length > 0)
+    return articles
   }
 
   async show ({ params }) {
