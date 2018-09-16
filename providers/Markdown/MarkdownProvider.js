@@ -63,8 +63,8 @@ class MarkdownProvider extends ServiceProvider {
           data: {
             hName: 'img',
             hProperties: {
-              src: props.src,
               className: [props.align],
+              src: props.src,
               alt: props.legend || ''
             },
           },

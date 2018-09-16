@@ -13,12 +13,28 @@ Route.get('articles/categories', 'ArticleCategoryController.index')
 Route.get('articles/:id', 'ArticleController.show')
 Route.get('articles', 'ArticleController.index')
 
+Route.get('teams/categories', 'TeamCategoryController.index')
+
 Route.group(() => {
   Route.get('me', 'UserController.current')
   Route.delete('sessions', 'SessionController.destroy')
 }).middleware('auth')
 
 Route.group(() => {
+  Route.get('members', 'MemberController.index')
+  Route.get('members/:id', 'MemberController.show')
+
+  // TODO: add validator
+  Route.post('members', 'MemberController.store')
+  Route.put('members/:id', 'MemberController.update')
+
+  Route.get('teams', 'TeamController.index')
+  Route.get('teams/:id', 'TeamController.show')
+
+  // TODO: add validator
+  Route.post('teams', 'TeamController.store')
+  Route.put('teams/:id', 'TeamController.update')
+
   Route.get('articles', 'ArticleController.index')
   Route.post('articles', 'ArticleController.store').validator('ArticleStore')
   Route.get('articles/:id', 'ArticleController.show')

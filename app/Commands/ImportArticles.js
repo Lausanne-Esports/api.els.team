@@ -33,6 +33,7 @@ class ImportArticles extends Command {
       try {
         const newCategory = categories.find(c => c.code === article.game)
         const newArticle = await Article.create({
+          featured: article.featured,
           thumbnail: article.picture_card_url,
           featured_thumbnail: article.picture_featured_url,
           category_id: newCategory ? newCategory.id : 1,

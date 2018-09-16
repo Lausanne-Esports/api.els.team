@@ -1,17 +1,11 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 const moment = require('moment')
 
-class Article extends Model {
-  static scopePublished (query) {
-    return query
-      .where('published_at', '<', moment().format('YYYY-MM-DD HH:mm:ss'))
-  }
-
+class Member extends Model {
   static get dates () {
-    return super.dates.concat(['published_at'])
+    return super.dates.concat(['birth_on'])
   }
 
   static formatDates (field, value) {
@@ -33,14 +27,6 @@ class Article extends Model {
       return value.format('DD.MM.YYYY H:mm')
     }
   }
-
-  category () {
-    return this.belongsTo('App/Models/ArticleCategory', 'category_id')
-  }
-
-  translations () {
-    return this.hasMany('App/Models/ArticleTranslation')
-  }
 }
 
-module.exports = Article
+module.exports = Member
