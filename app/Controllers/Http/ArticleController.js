@@ -7,6 +7,7 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
+const { omit } = require('lodash')
 const Markdown = use('Markdown')
 const Article = use('App/Models/Article')
 const Language = use('App/Models/Language')
@@ -54,7 +55,7 @@ class ArticleController {
 
     // Create final payload
     const payload = {
-      ...translation.toJSON(),
+      ...omit(translation.toJSON(), ['article_id', 'view_count', 'state_id']),
       body: await Markdown.renderToHtml(translation.toJSON().body),
       ...article.toJSON(),
       translations: article.toJSON().translations.filter((t) => t.language_id !== language.id)
