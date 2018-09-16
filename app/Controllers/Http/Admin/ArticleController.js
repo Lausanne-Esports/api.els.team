@@ -17,6 +17,7 @@ class ArticleController {
     const articles = await Article.query()
       .with('translations.language')
       .with('category')
+      .orderBy('published_at', 'desc')
       .fetch()
 
     return articles

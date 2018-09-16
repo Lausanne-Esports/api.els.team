@@ -16,6 +16,7 @@ const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 class ArticleController {
   async index ({ auth, request }) {
     const query = Article.query()
+      .published()
       .whereHas('translations', (builder) => {
         builder.where('state_id', 4)
       })
@@ -25,6 +26,7 @@ class ArticleController {
           .where('state_id', 4)
       })
       .with('category')
+      .orderBy('published_at', 'desc')
 
 
     if (request.input('filter')) {
