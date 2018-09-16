@@ -29,10 +29,12 @@ class ArticleController {
       .orderBy('published_at', 'desc')
 
 
-    if (request.input('filter')) {
+    if (request.input('filter') && request.input('filter') !== 'featured') {
       query.whereHas('category', (builder) => {
         builder.where('code', request.input('filter'))
       })
+    } else if (request.input('filter') === 'featured') {
+      query.where('featured', true)
     }
 
     if (request.input('limit')) {
