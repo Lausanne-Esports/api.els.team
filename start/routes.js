@@ -22,6 +22,7 @@ Route.group(() => {
   Route.get('articles', 'ArticleController.index')
   Route.post('articles', 'ArticleController.store').validator('ArticleStore')
   Route.get('articles/:id', 'ArticleController.show')
+  Route.post('articles/:id/featured', 'ArticleController.featured')
 
   // TODO: add validator
   Route.put('articles/:id', 'ArticleController.update')

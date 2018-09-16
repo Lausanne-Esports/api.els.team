@@ -46,6 +46,19 @@ class ArticleController {
     return article
   }
 
+  async featured ({ params, response }) {
+    const featuredArticle = await Article.findByOrFail('featured', true)
+    const article = await Article.findOrFail(params.id)
+
+    featuredArticle.featured = false
+    article.featured = true
+
+    await featuredArticle.save()
+    await article.save()
+
+    return response.noContent()
+  }
+
   async update ({ params, request }) {
     const metadata = this.$getMetadata(request)
 
