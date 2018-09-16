@@ -42,7 +42,7 @@ class ArticleController {
 
   async show ({ params, request }) {
     const language = await Language.findByOrFail('code', request.input('lang'))
-    const article = await Article.query().with('translations', (builder) => builder.select(['language_id', 'article_id']).where('state_id', 4)).with('category').where('id', params.id).firstOrFail()
+    const article = await Article.query().published().with('translations', (builder) => builder.select(['language_id', 'article_id']).where('state_id', 4)).with('category').where('id', params.id).firstOrFail()
     const translation = await article.translations().where('language_id', language.id).first()
 
     if (!translation) {

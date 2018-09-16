@@ -1,6 +1,7 @@
 'use strict'
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
+const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
 /**
  * This class handles all exceptions thrown during
@@ -22,7 +23,7 @@ class ExceptionHandler extends BaseExceptionHandler {
    */
   async handle (error, { request, response }) {
     if (error.code === 'E_INVALID_CREDENTIAL') {
-       return response.status(error.status).send({
+      return response.status(error.status).send({
         errors: [{
           "status": error.status,
           "code": error.code,
@@ -30,6 +31,18 @@ class ExceptionHandler extends BaseExceptionHandler {
         }]
       })
     }
+
+    if (error.code === 'E_MISSING_DATABASE_ROW') {
+      return response.status(404).send({
+        errors: [{
+          status: 404,
+          code: 'E_MODEL_NOT_FOUND',
+          detail: 'The requested model cannot be found',
+        }],
+      })
+    }
+
+    console.log(error)
 
     return super.handle(...arguments)
   }
