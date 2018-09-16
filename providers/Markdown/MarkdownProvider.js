@@ -22,7 +22,7 @@ class MarkdownProvider extends ServiceProvider {
   $registerMacroBlockquote () {
     Markdown.addMacro('blockquote', (content, props, { transformer, eat }) => {
       const ast = {
-        type: 'blockquote',
+        type: 'blockquoteNode',
         data: { hName: 'blockquote' },
         children: transformer.tokenizeBlock(content, eat.now()),
       }
