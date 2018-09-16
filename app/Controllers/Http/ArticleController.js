@@ -13,7 +13,7 @@ const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
 class ArticleController {
   async index ({ auth, request }) {
-    const articles = await Article.query()
+    const query = Article.query()
       .whereHas('translations', (builder) => {
         builder.where('state_id', 4)
       })
@@ -23,9 +23,19 @@ class ArticleController {
           .where('state_id', 4)
       })
       .with('category')
-      .fetch()
 
-    return articles
+
+    if (request.input('filter')) {
+      query.whereHas('category', (builder) => {
+        builder.where('code', request.input('filter'))
+      })
+    }
+
+    if (request.input('limit')) {
+      query.limit(request.input('limit'))
+    }
+
+    return query.fetch()
   }
 
   async show ({ params }) {

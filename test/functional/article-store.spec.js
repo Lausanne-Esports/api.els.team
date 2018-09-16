@@ -19,7 +19,7 @@ trait('DatabaseTransactions')
 
 const article = {
   headline: 'My First Article',
-  description: '',
+  description: null,
   body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit veritatis rerum amet odio nostrum perferendis neque, vitae impedit aspernatur placeat?',
   // published_at: '04/03/1994 11pm',
   template_id: 1,
@@ -34,7 +34,7 @@ before(async () => {
 
 test('should be able to create article with valid data', async ({ assert, client }) => {
   const response = await client
-    .post('articles')
+    .post('admin/articles')
     .loginVia(user)
     .send(article)
     .end()
@@ -57,11 +57,11 @@ test('should be able to translate an existing article', async ({ assert, client 
   const article = await Factory.model('App/Models/Article').create()
 
   const response = await client
-    .post(`articles/${article.id}/translations`)
+    .post(`admin/articles/${article.id}/translations`)
     .loginVia(user)
     .send({
       headline: 'Mon premier article',
-      description: '',
+      description: null,
       body: 'Lorem',
       state_id: 1,
       language_id: 1,
@@ -75,7 +75,7 @@ test('should be able to translate an existing article', async ({ assert, client 
     template_id: article.template_id,
     translations: [{
       headline: 'Mon premier article',
-      description: '',
+      description: null,
       body: 'Lorem',
       state_id: 1,
       language_id: 1,
@@ -90,11 +90,11 @@ test('shouldn\'t be able to translate an article twice in the same language', as
   await article.translations().create(translation.toJSON())
 
   const response = await client
-    .post(`articles/${article.id}/translations`)
+    .post(`admin/articles/${article.id}/translations`)
     .loginVia(user)
     .send({
       headline: 'Mon premier article',
-      description: '',
+      description: null,
       body: 'Lorem',
       state_id: 1,
       language_id: 1,
@@ -113,33 +113,33 @@ test(`should test that headline is required`, async ({ assert, client }) => {
 })
 
 test(`should test that language_id is required`, async ({ assert, client }) => {
-  testRequireField('language_id', article, 'articles', user, assert, client)
+  testRequireField('language_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that state_id is required`, async ({ assert, client }) => {
-  testRequireField('state_id', article, 'articles', user, assert, client)
+  testRequireField('state_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that template_id is required`, async ({ assert, client }) => {
-  testRequireField('template_id', article, 'articles', user, assert, client)
+  testRequireField('template_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that category_id is required`, async ({ assert, client }) => {
-  testRequireField('category_id', article, 'articles', user, assert, client)
+  testRequireField('category_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that language_id must be a number`, async ({ assert, client }) => {
-  testNumberField('language_id', article, 'articles', user, assert, client)
+  testNumberField('language_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that state_id must be a number`, async ({ assert, client }) => {
-  testNumberField('state_id', article, 'articles', user, assert, client)
+  testNumberField('state_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that template_id must be a number`, async ({ assert, client }) => {
-  testNumberField('template_id', article, 'articles', user, assert, client)
+  testNumberField('template_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that category_id must be a number`, async ({ assert, client }) => {
-  testNumberField('category_id', article, 'articles', user, assert, client)
+  testNumberField('category_id', article, 'admin/articles', user, assert, client)
 })

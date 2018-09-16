@@ -13,11 +13,11 @@ class Article extends Model {
 
   static formatDates (field, value) {
     if (field.slice(-3) === '_on') {
-      return moment(value, 'DD.MM.YYYY').format('YYYY-MM-DD')
+      return moment(value, 'DD.MM.YYYY').format()
     }
 
     if (field.slice(-3) === '_at') {
-      return moment(value, 'DD.MM.YYYY H:mm').format('YYYY-MM-DD HH:mm:ss')
+      return moment(value, 'DD.MM.YYYY H:mm').format()
     }
   }
 
