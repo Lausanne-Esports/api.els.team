@@ -13,8 +13,8 @@ class ArticleSchema extends Schema {
       table.boolean('featured').notNullable().defaultTo(false)
       table.dateTime('published_at').defaultTo(this.fn.now())
 
-      table.integer('template_id').unsigned().notNullable().defaultTo(0)
-      table.integer('category_id').unsigned().notNullable().defaultTo(0)
+      table.integer('template_id').unsigned().notNullable().defaultTo(1)
+      table.integer('category_id').unsigned().notNullable().defaultTo(1)
     })
 
     this.create('article_translations', (table) => {
@@ -27,7 +27,7 @@ class ArticleSchema extends Schema {
 
       table.integer('view_count').unsigned().notNullable().defaultTo(0)
       table.integer('article_id').unsigned().notNullable()
-      table.integer('state_id').unsigned().notNullable().defaultTo(0)
+      table.integer('state_id').unsigned().notNullable().defaultTo(1)
       table.integer('language_id').unsigned().notNullable()
     })
 

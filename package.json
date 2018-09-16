@@ -21,6 +21,7 @@
     "@adonisjs/vow": "^1.0.16",
     "@dimerapp/markdown": "^3.1.2",
     "argon2": "^0.19.3",
+    "got": "^9.2.1",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "pg": "^7.4.3"
