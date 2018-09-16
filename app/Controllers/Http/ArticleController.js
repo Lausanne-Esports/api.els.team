@@ -55,9 +55,9 @@ class ArticleController {
 
     // Create final payload
     const payload = {
-      ...omit(translation.toJSON(), ['article_id', 'view_count', 'state_id']),
+      ...omit(translation.toJSON(), ['article_id', 'view_count', 'state_id', 'created_at', 'updated_at']),
       body: await Markdown.renderToHtml(translation.toJSON().body),
-      ...article.toJSON(),
+      ...omit(article.toJSON(), ['created_at', 'updated_at']),
       translations: article.toJSON().translations.filter((t) => t.language_id !== language.id)
     }
 
