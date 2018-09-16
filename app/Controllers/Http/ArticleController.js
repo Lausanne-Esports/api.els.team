@@ -9,6 +9,7 @@
 
 const Markdown = use('Markdown')
 const Article = use('App/Models/Article')
+const Language = use('App/Models/Language')
 const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
 class ArticleController {
@@ -38,24 +39,28 @@ class ArticleController {
     return query.fetch()
   }
 
-  async show ({ params }) {
-    let article = await Article.findOrFail(params.id)
+  async show ({ params, request }) {
+    const language = await Language.findByOrFail('code', request.input('lang'))
+    const article = await Article.query().with('translations', (builder) => builder.select(['language_id', 'article_id']).where('state_id', 4)).with('category').where('id', params.id).firstOrFail()
+    const translation = await article.translations().where('language_id', language.id).first()
 
-    await article.load('translations', (builder) => {
-      builder.where('state_id', 4)
-    })
-
-    article = article.toJSON()
-
-    if (article.translations.length <= 0) {
+    if (!translation) {
       throw new ModelNotFound()
     }
 
-    article.translations.forEach(async (translation) => {
-      translation.body = await Markdown.renderToHtml(translation.body)
-    })
+    // Increments the view counter
+    translation.view_count++
+    await translation.save()
 
-    return article
+    // Create final payload
+    const payload = {
+      ...translation.toJSON(),
+      body: await Markdown.renderToHtml(translation.toJSON().body),
+      ...article.toJSON(),
+      translations: article.toJSON().translations.filter((t) => t.language_id !== language.id)
+    }
+
+    return payload
   }
 }
 
