@@ -13,6 +13,8 @@ Route.get('articles/categories', 'ArticleCategoryController.index')
 Route.get('articles/:id', 'ArticleController.show')
 Route.get('articles', 'ArticleController.index')
 
+Route.get('teams', 'TeamController.index')
+Route.get('teams/:id', 'TeamController.show')
 Route.get('teams/categories', 'TeamCategoryController.index')
 
 Route.group(() => {
