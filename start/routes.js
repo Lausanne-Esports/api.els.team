@@ -5,6 +5,8 @@ const Route = use('Route')
 
 Route.post('sessions', 'SessionController.store').validator('SessionStore')
 Route.post('users/validate', 'Admin/UserController.validate')
+Route.post('password-requests', 'Admin/PasswordRequestController.store')
+Route.post('password-requests/:token', 'Admin/PasswordRequestController.update')
 
 Route.get('articles/states', 'ArticleStateController.index')
 Route.get('articles/templates', 'ArticleTemplateController.index')
