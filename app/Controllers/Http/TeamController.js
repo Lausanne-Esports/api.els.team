@@ -21,12 +21,12 @@ class TeamController {
         ...pick(member, ['nickname', 'lastname', 'firstname']),
         role: member.pivot.role,
         socials: [
-          { type: 'twitter', url: member.twitter },
-          { type: 'facebook', url: member.facebook },
-          { type: 'twitch', url: member.twitch },
-          { type: 'youtube', url: member.youtube },
+          { type: 'twitter', url: `https://twitter.com/${member.twitter}` },
+          { type: 'facebook', url: `https://www.facebook.com/${member.facebook}` },
+          { type: 'twitch', url: `https://www.twitch.tv/${member.twitch}` },
+          { type: 'youtube', url: `https://www.youtube.com/channel/${member.youtube}` },
           { type: 'bnet', url: member.battletag },
-          { type: 'steam', url: member.steam },
+          { type: 'steam', url: `https://steamcommunity.com/id/${member.steam}` },
         ]
       }
     })
