@@ -9,6 +9,7 @@ class TeamsSchema extends Schema {
       table.timestamps()
 
       table.string('name')
+      table.boolean('academy').notNullable().defaultTo(false)
       table.integer('order').unsigned().notNullable()
       table.boolean('activated').notNullable().defaultTo(false)
       table.integer('category_id').unsigned().notNullable()
@@ -61,7 +62,7 @@ class TeamsSchema extends Schema {
     this.dropIfExists('teams')
     this.dropIfExists('team_categories')
     this.dropIfExists('members')
-    this.dropIfExists('members_teams')
+    this.dropIfExists('member_team')
   }
 }
 

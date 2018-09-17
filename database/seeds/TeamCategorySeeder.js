@@ -21,7 +21,7 @@ class TeamCategorySeeder {
     await TeamCategory.findOrCreate({ code: 'rl', name: 'Rocket League' })
     await TeamCategory.findOrCreate({ code: 'lol', name: 'League of Legends' })
     await TeamCategory.findOrCreate({ code: 'csgo', name: 'Counter-Strike: Global Offensive' })
-    await TeamCategory.findOrCreate({ code: 'fornite', name: 'Fornite' })
+    await TeamCategory.findOrCreate({ code: 'fortnite', name: 'Fortnite' })
   }
 }
 
