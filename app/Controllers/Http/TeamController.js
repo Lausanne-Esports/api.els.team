@@ -10,13 +10,13 @@ class TeamController {
     ).toJSON()
 
     return teams.map(team => ({
-      ...pick(team, ['id', 'name', 'order', 'category']),
+      ...pick(team, ['id', 'name', 'order', 'category', 'academy']),
       numberOfPlayers: team.members.length
     }))
   }
 
   async show ({ params }) {
-    const team = (await Team.query().where('id', params.id).with('category').with('members').first()).toJSON()
+    const team = (await Team.query().where('id', params.id).where('activated', true).with('category').with('members').first()).toJSON()
 
     team.players = team.members.map((member) => {
       return {
