@@ -30,10 +30,18 @@ Route.group(() => {
 
   Route.get('teams', 'TeamController.index')
   Route.get('teams/:id', 'TeamController.show')
+  Route.get('teams/:id/members', 'TeamMemberController.index')
 
   // TODO: add validator
   Route.post('teams', 'TeamController.store')
   Route.put('teams/:id', 'TeamController.update')
+  Route.post('teams/:id/up', 'TeamController.up')
+  Route.post('teams/:id/down', 'TeamController.down')
+  Route.post('teams/:id/members', 'TeamMemberController.store')
+  Route.delete('teams/:id/members/:memberId', 'TeamMemberController.destroy')
+
+  Route.post('teams/:id/members/:memberId/up', 'TeamMemberController.up')
+  Route.post('teams/:id/members/:memberId/down', 'TeamMemberController.down')
 
   Route.get('articles', 'ArticleController.index')
   Route.post('articles', 'ArticleController.store').validator('ArticleStore')

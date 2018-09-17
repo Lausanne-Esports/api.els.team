@@ -12,7 +12,7 @@ class ArticleSchema extends Schema {
       table.string('featured_thumbnail')
       table.boolean('featured').notNullable().defaultTo(false)
       table.dateTime('published_at').defaultTo(this.fn.now())
-
+      table.integer('legacy_id').unsigned()
       table.integer('template_id').unsigned().notNullable().defaultTo(1)
       table.integer('category_id').unsigned().notNullable().defaultTo(1)
     })

@@ -9,6 +9,8 @@ class TeamsSchema extends Schema {
       table.timestamps()
 
       table.string('name')
+      table.integer('order').unsigned().notNullable()
+      table.boolean('activated').notNullable().defaultTo(false)
       table.integer('category_id').unsigned().notNullable()
     })
 
@@ -47,10 +49,11 @@ class TeamsSchema extends Schema {
       table.string('youtube')
     })
 
-    this.create('members_teams', (table) => {
+    this.create('member_team', (table) => {
       table.integer('member_id').unsigned().notNullable()
       table.integer('team_id').unsigned().notNullable()
       table.string('role')
+      table.integer('order').unsigned().notNullable()
     })
   }
 

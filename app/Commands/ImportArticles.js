@@ -39,6 +39,7 @@ class ImportArticles extends Command {
           category_id: newCategory ? newCategory.id : 1,
           published_at: moment(article.released_at).format('DD.MM.YYYY H:mm'),
           template_id: 1,
+          legacy_id: article.id,
         })
 
         await newArticle.translations().create({

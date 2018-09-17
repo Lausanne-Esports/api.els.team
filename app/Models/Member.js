@@ -27,6 +27,11 @@ class Member extends Model {
       return value.format('DD.MM.YYYY H:mm')
     }
   }
+
+  teams () {
+    return this.belongsToMany('App/Models/Team')
+      .withPivot(['role', 'order']).pivotPrimaryKey(null)
+  }
 }
 
 module.exports = Member
