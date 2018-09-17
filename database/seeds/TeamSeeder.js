@@ -21,11 +21,10 @@ class TeamSeeder {
     await Team.findOrCreate({ name: 'Indigo', category_id: this.$findCategoryFor('lol'), order: 2 })
     await Team.findOrCreate({ name: 'Hearthstone', category_id: this.$findCategoryFor('hs'), order: 3 })
     await Team.findOrCreate({ name: 'Aurora', category_id: this.$findCategoryFor('rl'), order: 4 })
-    await Team.findOrCreate({ name: 'FIFA', category_id: this.$findCategoryFor('fifa'), order: 5 })
-    await Team.findOrCreate({ name: 'Hope', category_id: this.$findCategoryFor('fortnite'), academy: true, order: 6 })
-    await Team.findOrCreate({ name: 'Hearthstone', category_id: this.$findCategoryFor('hs'), academy: true, order: 7 })
-    await Team.findOrCreate({ name: 'FIFA', category_id: this.$findCategoryFor('fifa'), academy: true, order: 8 })
-    await Team.findOrCreate({ name: 'Staff', category_id: this.$findCategoryFor('staff'), order: 9 })
+    await Team.findOrCreate({ name: 'Hope', category_id: this.$findCategoryFor('fortnite'), academy: true, order: 5 })
+    await Team.findOrCreate({ name: 'Hearthstone', category_id: this.$findCategoryFor('hs'), academy: true, order: 6 })
+    await Team.findOrCreate({ name: 'FIFA', category_id: this.$findCategoryFor('fifa'), academy: true, order: 7 })
+    await Team.findOrCreate({ name: 'Staff', category_id: this.$findCategoryFor('staff'), order: 8 })
   }
 
   $findCategoryFor(code) {
