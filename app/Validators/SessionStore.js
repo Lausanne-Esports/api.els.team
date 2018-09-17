@@ -13,7 +13,7 @@ class SessionStore {
 
   get rules () {
     return {
-      email: 'required|email',
+      uid: 'required',
       password: 'required',
     }
   }

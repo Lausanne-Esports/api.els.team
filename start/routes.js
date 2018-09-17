@@ -3,9 +3,8 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
-Route.get('users', 'UserController.index')
-Route.post('users', 'UserController.store').validator('UserStore')
 Route.post('sessions', 'SessionController.store').validator('SessionStore')
+Route.post('users/validate', 'Admin/UserController.validate')
 
 Route.get('articles/states', 'ArticleStateController.index')
 Route.get('articles/templates', 'ArticleTemplateController.index')
@@ -18,11 +17,14 @@ Route.get('teams/categories', 'TeamCategoryController.index')
 Route.get('teams/:id', 'TeamController.show')
 
 Route.group(() => {
-  Route.get('me', 'UserController.current')
+  Route.get('me', 'Admin/UserController.current')
   Route.delete('sessions', 'SessionController.destroy')
 }).middleware('auth')
 
 Route.group(() => {
+  Route.get('users', 'UserController.index')
+  Route.post('users', 'UserController.store').validator('UserStore')
+
   Route.get('members', 'MemberController.index')
   Route.get('members/:id', 'MemberController.show')
 

@@ -12,7 +12,7 @@ test('should be able to signin', async ({ assert, client }) => {
   const response = await client
     .post('sessions')
     .send({
-      email: user.email,
+      uid: user.email,
       password: 'secret',
     })
     .end()
@@ -23,11 +23,11 @@ test('should be able to signin', async ({ assert, client }) => {
   })
 })
 
-test('should throw invalid credential when email is incorrect', async ({ assert, client }) => {
+test('should throw invalid credential when uid is incorrect', async ({ assert, client }) => {
   const response = await client
     .post('sessions')
     .send({
-      email: 'romain.lanz@lausanne-esports.ch',
+      uid: 'romain.lanz@lausanne-esports.ch',
       password: 'secret',
     })
     .end()
@@ -48,7 +48,7 @@ test('should throw invalid credential when password is incorrect', async ({ asse
   const response = await client
     .post('sessions')
     .send({
-      email: user.email,
+      uid: user.email,
       password: 'ThisIsntGoingToWork',
     })
     .end()
@@ -63,7 +63,7 @@ test('should throw invalid credential when password is incorrect', async ({ asse
   })
 })
 
-test('should test that email is required', async ({ assert, client }) => {
+test('should test that uid is required', async ({ assert, client }) => {
   const response = await client
     .post('sessions')
     .send({
@@ -74,7 +74,7 @@ test('should test that email is required', async ({ assert, client }) => {
   response.assertStatus(400)
   response.assertJSONSubset({
     errors: [{
-      source: { pointer: 'email' },
+      source: { pointer: 'uid' },
       title: 'required',
     }]
   })
@@ -84,7 +84,7 @@ test('should test that password is required', async ({ assert, client }) => {
   const response = await client
     .post('sessions')
     .send({
-      email: 'romain.lanz@lausanne-esports.ch',
+      uid: 'romain.lanz@lausanne-esports.ch',
     })
     .end()
 
@@ -93,23 +93,6 @@ test('should test that password is required', async ({ assert, client }) => {
     errors: [{
       source: { pointer: 'password' },
       title: 'required',
-    }]
-  })
-})
-
-test('should test that email must be correctly formated', async ({ assert, client }) => {
-  const response = await client
-    .post('sessions')
-    .send({
-      email: 'ThisIsntGoingToWork'
-    })
-    .end()
-
-  response.assertStatus(400)
-  response.assertJSONSubset({
-    errors: [{
-      source: { pointer: 'email' },
-      title: 'email',
     }]
   })
 })
@@ -123,7 +106,7 @@ test('should test that all errors are sent back', async ({ assert, client }) => 
   response.assertStatus(400)
   response.assertJSONSubset({
     errors: [
-      { source: { pointer: 'email' }, title: 'required' },
+      { source: { pointer: 'uid' }, title: 'required' },
       { source: { pointer: 'password' }, title: 'required' },
     ]
   })

@@ -1,6 +1,8 @@
 'use strict'
 
+const Persona = use('Persona')
 const User = use('App/Models/User')
+const Encryption = use('Encryption')
 
 class UserController {
   async index () {
@@ -14,18 +16,28 @@ class UserController {
   }
 
   async store ({ request, response }) {
-    const data = request.only([
+    const payload = request.only([
       'username', 'email', 'password', 'password_confirmation']
     )
 
-    delete data.password_confirmation
-
-    const user = await User.create(data)
+    const user = await Persona.register(payload)
 
     return response.ok({
       user,
       status: 200,
       message: 'Account created successfully',
+    })
+  }
+
+  async validate ({ auth, request, response }) {
+    const token = Encryption.base64Decode(request.input('token'))
+    const user = await Persona.verifyEmail(token)
+
+    // await auth.login(user)
+
+    return response.ok({
+      status: 200,
+      message: 'Account validated successfully',
     })
   }
 }

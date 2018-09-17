@@ -14,6 +14,7 @@ const { join } = require('path')
 */
 const providers = [
   '@adonisjs/framework/providers/AppProvider',
+  '@adonisjs/framework/providers/ViewProvider',
   '@adonisjs/auth/providers/AuthProvider',
   '@adonisjs/bodyparser/providers/BodyParserProvider',
   '@adonisjs/cors/providers/CorsProvider',
@@ -21,6 +22,8 @@ const providers = [
   '@adonisjs/validator/providers/ValidatorProvider',
   '@adonisjs/vow/providers/VowProvider',
   '@adonisjs/session/providers/SessionProvider',
+  '@adonisjs/persona/providers/PersonaProvider',
+  '@adonisjs/mail/providers/MailProvider',
 
   join(__dirname, '../providers/Markdown/MarkdownProvider'),
 ]
@@ -62,6 +65,7 @@ const aliases = {}
 */
 const commands = [
   'App/Commands/ImportArticles',
+  'App/Commands/HemlCommand',
 ]
 
 module.exports = { providers, aceProviders, aliases, commands }
