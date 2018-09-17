@@ -4,7 +4,7 @@ const Member = use('App/Models/Member')
 
 class MemberController {
   index () {
-    return Member.all()
+    return Member.query().orderBy('nickname').fetch()
   }
 
   show ({ params }) {
