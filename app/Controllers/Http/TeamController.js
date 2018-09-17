@@ -32,7 +32,7 @@ class TeamController {
     })
 
     return {
-      ...pick(team, ['id', 'name', 'order', 'players', 'category'])
+      ...pick(team, ['id', 'name', 'order', 'academy', 'players', 'category'])
     }
   }
 }
