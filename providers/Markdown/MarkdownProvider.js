@@ -57,13 +57,17 @@ class MarkdownProvider extends ServiceProvider {
     Markdown.addMacro('image', (props) => {
       const ast = {
         type: 'figureContainer',
-        data: { hName: 'figure' },
+        data: {
+          hName: 'figure',
+          hProperties: {
+            className: [props.align],
+          },
+        },
         children: [{
           type: 'figureImage',
           data: {
             hName: 'img',
             hProperties: {
-              className: [props.align],
               src: props.src,
               alt: props.legend || ''
             },
