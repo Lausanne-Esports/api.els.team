@@ -27,7 +27,7 @@ class MemberController {
   $getFormField (request) {
     return request.only([
       'nickname', 'lastname', 'firstname', 'contract',
-      'birth_on', 'clothes_size', 'address', 'postal_code', 'city',
+      'birth_on', 'clothes_size', 'phone_number','address', 'postal_code', 'city',
       'iban', 'rib', 'swift',
       'facebook', 'twitter', 'twitch', 'youtube', 'battletag', 'steam',
     ])
