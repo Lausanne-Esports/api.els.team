@@ -5,7 +5,9 @@ const Team = use('App/Models/Team')
 
 class TeamController {
   async index () {
-    const teams = (await Team.query().with('category').with('members').fetch()).toJSON()
+    const teams = (
+      await Team.query().with('category').with('members').where('activated', true).fetch()
+    ).toJSON()
 
     return teams.map(team => ({
       ...pick(team, ['id', 'name', 'order', 'category']),

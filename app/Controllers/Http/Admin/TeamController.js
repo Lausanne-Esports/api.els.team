@@ -9,7 +9,7 @@ class TeamController {
   }
 
   async store ({ request }) {
-    const data = request.only(['name', 'category_id'])
+    const data = request.only(['name', 'category_id', 'academy', 'activated'])
     const [{ max: maxOrder }] = await Database.from('teams').max('order')
     data.order = maxOrder + 1
     console.log('maxOrder', maxOrder);
@@ -24,7 +24,7 @@ class TeamController {
   async update ({ params, request, response }) {
     const team = await Team.findOrFail(params.id)
 
-    team.merge(request.only(['name', 'category_id']))
+    team.merge(request.only(['name', 'category_id', 'academy', 'activated']))
     await team.save()
 
     return response.noContent()
