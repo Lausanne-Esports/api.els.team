@@ -14,8 +14,8 @@ Route.get('articles/:id', 'ArticleController.show')
 Route.get('articles', 'ArticleController.index')
 
 Route.get('teams', 'TeamController.index')
-Route.get('teams/:id', 'TeamController.show')
 Route.get('teams/categories', 'TeamCategoryController.index')
+Route.get('teams/:id', 'TeamController.show')
 
 Route.group(() => {
   Route.get('me', 'UserController.current')
