@@ -7,7 +7,7 @@ class ContactController {
     const payload = request.only(['title', 'email', 'message'])
     Mail.send('emails.contact', payload, (message) => {
       message
-        .to('romain.lanz@slynova.ch')
+        .to('contact@lausanne-esports.ch')
         .from(payload.email)
         .subject(`[Contact] ${payload.title}`)
     })
