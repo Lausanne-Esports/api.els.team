@@ -67,6 +67,19 @@ class ArticleController {
 
     return payload
   }
+
+  async legacy ({ params }) {
+    const article = await Article
+      .query()
+      .published()
+      .with('translations', (builder) => builder.select(['language_id', 'article_id']))
+      .where('id', params.id)
+      .firstOrFail()
+
+    const translation = await article.translations().where('language_id', 1).first()
+
+    return { id: article.id, headline: translation.headline}
+  }
 }
 
 module.exports = ArticleController

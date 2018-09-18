@@ -15,6 +15,8 @@ Route.get('articles/categories', 'ArticleCategoryController.index')
 Route.get('articles/:id', 'ArticleController.show')
 Route.get('articles', 'ArticleController.index')
 
+Route.get('articles/legacy/:id', 'ArticleController.legacy')
+
 Route.get('teams', 'TeamController.index')
 Route.get('teams/categories', 'TeamCategoryController.index')
 Route.get('teams/:id', 'TeamController.show')
