@@ -73,7 +73,7 @@ class ArticleController {
       .query()
       .published()
       .with('translations', (builder) => builder.select(['language_id', 'article_id']))
-      .where('id', params.id)
+      .where('legacy_id', params.id)
       .firstOrFail()
 
     const translation = await article.translations().where('language_id', 1).first()
