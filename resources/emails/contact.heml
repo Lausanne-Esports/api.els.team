@@ -28,6 +28,7 @@
       <row>
         <column>
           <p>Un nouveau message a été reçu depuis le formulaire de contact.</p>
+          <p><strong>IP:</strong> {{ ip }}</p>
           <hr>
       </row>
       <row style="margin-top: 20px; margin-bottom: 50px;">
