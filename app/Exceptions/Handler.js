@@ -42,8 +42,6 @@ class ExceptionHandler extends BaseExceptionHandler {
       })
     }
 
-    console.log(error)
-
     return super.handle(...arguments)
   }
 
