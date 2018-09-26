@@ -8,7 +8,7 @@ class ContactController {
 
     Mail.send('emails.contact', { ...payload, ip: request.ip() }, (message) => {
       message
-        .to('romain.lanz@slynova.ch')
+        .to('contact@lausanne-esports.ch')
         .from(payload.email)
         .subject(`[Contact] ${payload.title}`)
     })
