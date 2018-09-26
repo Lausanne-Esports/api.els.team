@@ -6,7 +6,7 @@ const Model = use('Model')
 class ArticleState extends Model {
   static boot () {
     super.boot()
-    this.addTrait('NoTimsetamp')
+    this.addTrait('NoTimestamp')
   }
 }
 
