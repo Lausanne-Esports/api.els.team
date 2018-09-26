@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const Route = use('Route')
 
-Route.get('/', () => ({ version: '20180919' }))
+Route.get('/', () => ({ version: '20180926', uptime: process.uptime() }))
 
 Route.post('contact', 'ContactController.store').validator('Contact')
 Route.post('sessions', 'SessionController.store').validator('SessionStore')
