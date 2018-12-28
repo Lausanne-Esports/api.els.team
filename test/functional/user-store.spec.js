@@ -1,15 +1,30 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const Factory = use('Factory')
 const User = use('App/Models/User')
-const { test, trait } = use('Test/Suite')('User Store')
+const { before, test, trait } = use('Test/Suite')('User Store')
+let user = null
 
+trait('Auth/Client')
+trait('Session/Client')
 trait('Test/ApiClient')
 trait('DatabaseTransactions')
 
+before(async () => {
+  user = await Factory.model('App/Models/User').create()
+})
+
 test('should be able to register with valid data', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain.lanz@lausanne-esports.ch',
@@ -29,7 +44,8 @@ test('should be able to register with valid data', async ({ assert, client }) =>
 
 test('should test that password must match', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain.lanz@lausanne-esports.ch',
@@ -49,7 +65,8 @@ test('should test that password must match', async ({ assert, client }) => {
 
 test('should test that password is required', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain.lanz@lausanne-esports.ch',
@@ -67,7 +84,8 @@ test('should test that password is required', async ({ assert, client }) => {
 
 test('should test that password_confirmation is required', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain.lanz@lausanne-esports.ch',
@@ -86,7 +104,8 @@ test('should test that password_confirmation is required', async ({ assert, clie
 
 test('should test that username is required', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       email: 'romain.lanz@lausanne-esports.ch',
       password: 'secret',
@@ -107,7 +126,8 @@ test('should test that username must be unique', async ({ assert, client }) => {
   await Factory.model('App/Models/User').create({ username: 'romain.lanz' })
 
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain.lanz@lausanne-esports.ch',
@@ -127,7 +147,8 @@ test('should test that username must be unique', async ({ assert, client }) => {
 
 test('should test that email is required', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       password: 'secret',
@@ -146,7 +167,8 @@ test('should test that email is required', async ({ assert, client }) => {
 
 test('should test that email must be correctly formated', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain-esports.ch',
@@ -168,7 +190,8 @@ test('should test that email must be unique', async ({ assert, client }) => {
   await Factory.model('App/Models/User').create({ email: 'romain.lanz@lausanne-esports.ch' })
 
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({
       username: 'romain.lanz',
       email: 'romain.lanz@lausanne-esports.ch',
@@ -188,7 +211,8 @@ test('should test that email must be unique', async ({ assert, client }) => {
 
 test('should test that all errors are sent back', async ({ assert, client }) => {
   const response = await client
-    .post('users')
+    .post('admin/users')
+    .loginVia(user)
     .send({})
     .end()
 

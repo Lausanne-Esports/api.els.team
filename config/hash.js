@@ -1,6 +1,12 @@
 'use strict'
 
-/** @type {import('@adonisjs/framework/src/Env')} */
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const Env = use('Env')
 
 module.exports = {

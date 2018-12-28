@@ -1,6 +1,12 @@
 'use strict'
 
-/** @type {import('@adonisjs/framework/src/Route/Manager'} */
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const Route = use('Route')
 
 Route.get('/', () => ({ version: '20180926', uptime: process.uptime() }))
@@ -16,8 +22,6 @@ Route.get('articles/templates', 'ArticleTemplateController.index')
 Route.get('articles/categories', 'ArticleCategoryController.index')
 Route.get('articles/:id', 'ArticleController.show')
 Route.get('articles', 'ArticleController.index')
-
-Route.get('articles/legacy/:id', 'ArticleController.legacy')
 
 Route.get('teams', 'TeamController.index')
 Route.get('teams/categories', 'TeamCategoryController.index')

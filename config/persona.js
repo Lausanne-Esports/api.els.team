@@ -1,14 +1,11 @@
 'use strict'
 
-/*
-|--------------------------------------------------------------------------
-| Persona
-|--------------------------------------------------------------------------
-|
-| The persona is a simple and opinionated service to register, login and
-| manage user account
-|
-*/
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
 
 module.exports = {
   /*

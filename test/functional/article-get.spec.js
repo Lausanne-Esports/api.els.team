@@ -8,10 +8,22 @@
  */
 
 const Factory = use('Factory')
+const { validateAll } = use('indicative')
 const { test, trait } = use('Test/Suite')('Article Get')
 
 trait('Test/ApiClient')
 trait('DatabaseTransactions')
+
+const articleSchema = {
+  id: 'number',
+  category_id: 'number',
+  template_id: 'number',
+  'translations.*.headline': 'string',
+  'translations.*.description': 'string',
+  'translations.*.body': 'string',
+  'translations.*.state_id': 'number',
+  'translations.*.language_id': 'number',
+}
 
 test('should be able to get an article', async ({ assert, client }) => {
   const article = await Factory.model('App/Models/Article').create()
@@ -24,18 +36,7 @@ test('should be able to get an article', async ({ assert, client }) => {
     .end()
 
   response.assertStatus(200)
-  response.assertJSONSubset({
-    id: article.id,
-    category_id: article.category_id,
-    template_id: article.template_id,
-    translations: [{
-      headline: translation.headline,
-      description: translation.description,
-      body: translation.body,
-      state_id: 4,
-      language_id: 1,
-    }],
-  })
+  await validateAll(response.body, articleSchema)
 })
 
 test('shouldn\'t be able to get an article that has no translation published', async ({ assert, client }) => {
@@ -69,19 +70,8 @@ test('shouldn\'t be able to get a translation that is not published', async ({ a
     .end()
 
   response.assertStatus(200)
-  response.assertJSONSubset({
-    id: article.id,
-    category_id: article.category_id,
-    template_id: article.template_id,
-    translations: [{
-      headline: translation.headline,
-      description: translation.description,
-      body: translation.body,
-      state_id: 4,
-      language_id: 1,
-    }],
-  })
   assert.equal(response.body.translations.length, 1)
+  await validateAll(response.body, articleSchema)
 })
 
 test('should be able to get all translations for an article', async ({ assert, client }) => {
@@ -97,23 +87,6 @@ test('should be able to get all translations for an article', async ({ assert, c
     .end()
 
   response.assertStatus(200)
-  response.assertJSONSubset({
-    id: article.id,
-    category_id: article.category_id,
-    template_id: article.template_id,
-    translations: [{
-      headline: translation.headline,
-      description: translation.description,
-      body: translation.body,
-      state_id: 4,
-      language_id: 1,
-    }, {
-      headline: translation2.headline,
-      description: translation2.description,
-      body: translation2.body,
-      state_id: 4,
-      language_id: 2,
-    }],
-  })
   assert.equal(response.body.translations.length, 2)
+  await validateAll(response.body, articleSchema)
 })

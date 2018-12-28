@@ -1,5 +1,12 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const Persona = use('Persona')
 const User = use('App/Models/User')
 const Encryption = use('Encryption')

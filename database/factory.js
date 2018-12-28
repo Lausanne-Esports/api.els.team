@@ -1,16 +1,13 @@
 'use strict'
 
-/*
-|--------------------------------------------------------------------------
-| Factory
-|--------------------------------------------------------------------------
-|
-| Factories are used to define blueprints for database tables or Lucid
-| models. Later you can use these blueprints to seed your database
-| with dummy data.
-|
-*/
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
 
+const moment = use('moment')
 const Factory = use('Factory')
 
 Factory.blueprint('App/Models/User', (faker, index, data) => {
@@ -25,6 +22,7 @@ Factory.blueprint('App/Models/User', (faker, index, data) => {
 
 Factory.blueprint('App/Models/Article', (faker, index, data) => {
   const defaultValue = {
+    published_at: moment().subtract(1, 'days').format('DD.MM.YYYY HH:mm'),
     category_id: 1,
     template_id: 1,
   }

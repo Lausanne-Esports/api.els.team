@@ -1,20 +1,17 @@
 'use strict'
 
-/*
-|--------------------------------------------------------------------------
-| UserSeeder
-|--------------------------------------------------------------------------
-|
-| Make use of the Factory instance to seed database with dummy data or
-| make use of Lucid models directly.
-|
-*/
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
 
 const User = use('App/Models/User')
 
 class UserSeeder {
   async run () {
-    await User.findOrCreate({ username: 'romain.lanz', email: 'romain.lanz@slynova.ch', password: 'secret', account_status: 'active' })
+    // await User.findOrCreate({ username: 'romain.lanz', email: 'romain.lanz@slynova.ch', password: 'secret', account_status: 'active' })
   }
 }
 

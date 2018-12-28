@@ -7,13 +7,29 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const { omit } = require('lodash')
-const Markdown = use('Markdown')
 const Article = use('App/Models/Article')
 const Language = use('App/Models/Language')
-const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
+const ArticleItemTransformer = use('App/Transformers/ArticleItemTransformer')
 
 class ArticleController {
+  /**
+   * Injecting required dependencies auto
+   * fulfilled by the IoC container.
+   *
+   * @return {string[]}
+   */
+  static get inject () {
+    return [
+      'App/Repositories/ArticleRepository',
+      'App/Repositories/TranslationRepository',
+    ]
+  }
+
+  constructor (ArticleRepository, TranslationRepository) {
+    this.articleRepository = ArticleRepository
+    this.translationRepository = TranslationRepository
+  }
+
   async index ({ auth, request }) {
     const query = Article.query()
       .published()
@@ -44,41 +60,17 @@ class ArticleController {
     return query.fetch()
   }
 
-  async show ({ params, request }) {
-    const language = await Language.findByOrFail('code', request.input('lang', 'fr'))
-    const article = await Article.query().published().with('translations', (builder) => builder.select(['language_id', 'article_id']).where('state_id', 4)).with('category').where('id', params.id).firstOrFail()
-    const translation = await article.translations().where('language_id', language.id).first()
+  async show ({ params, request, transform }) {
+    const [language, article] = await Promise.all([
+      Language.findByOrFail('code', request.input('lang', 'fr')),
+      this.articleRepository.get(params.id)
+    ])
+    const translation = await this.translationRepository.get(article.id, language.id)
 
-    if (!translation) {
-      throw new ModelNotFound()
-    }
-
-    // Increments the view counter
-    translation.view_count++
-    await translation.save()
-
-    // Create final payload
-    const payload = {
-      ...omit(translation.toJSON(), ['article_id', 'view_count', 'state_id', 'created_at', 'updated_at']),
-      body: await Markdown.renderToHtml(translation.toJSON().body),
-      ...omit(article.toJSON(), ['created_at', 'updated_at']),
-      translations: article.toJSON().translations.filter((t) => t.language_id !== language.id)
-    }
-
-    return payload
-  }
-
-  async legacy ({ params }) {
-    const article = await Article
-      .query()
-      .published()
-      .with('translations', (builder) => builder.select(['language_id', 'article_id']))
-      .where('legacy_id', params.id)
-      .firstOrFail()
-
-    const translation = await article.translations().where('language_id', 1).first()
-
-    return { id: article.id, headline: translation.headline}
+    return transform.item(article)
+      .transformWith(ArticleItemTransformer)
+      .withContext(translation)
+      .toArray()
   }
 }
 

@@ -1,6 +1,11 @@
 'use strict'
 
-const _ = require('lodash')
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
 
 module.exports = async function testNumberField (field, data, endpoint, user, assert, client) {
   data[field] = 'a'

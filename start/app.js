@@ -1,5 +1,12 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const { join } = require('path')
 
 /*
@@ -25,6 +32,8 @@ const providers = [
   '@adonisjs/persona/providers/PersonaProvider',
   '@adonisjs/mail/providers/MailProvider',
 
+  'adonis-bumblebee/providers/BumblebeeProvider',
+
   join(__dirname, '../providers/Markdown/MarkdownProvider'),
 ]
 
@@ -38,7 +47,8 @@ const providers = [
 |
 */
 const aceProviders = [
-  '@adonisjs/lucid/providers/MigrationsProvider'
+  '@adonisjs/lucid/providers/MigrationsProvider',
+  'adonis-bumblebee/providers/CommandsProvider',
 ]
 
 /*
@@ -53,7 +63,9 @@ const aceProviders = [
 |   { Route: 'Adonis/Src/Route' }
 |
 */
-const aliases = {}
+const aliases = {
+  TransformerAbstract: 'Adonis/Addons/Bumblebee/TransformerAbstract',
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +76,7 @@ const aliases = {}
 |
 */
 const commands = [
-  'App/Commands/ImportArticles',
+  'App/Commands/ComputeArticleCommand',
   'App/Commands/HemlCommand',
 ]
 

@@ -105,41 +105,41 @@ test('shouldn\'t be able to translate an article twice in the same language', as
 })
 
 test(`should test that body is required`, async ({ assert, client }) => {
-  testRequireField('body', article, 'articles', user, assert, client)
+  await testRequireField('body', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that headline is required`, async ({ assert, client }) => {
-  testRequireField('headline', article, 'articles', user, assert, client)
+  await testRequireField('headline', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that language_id is required`, async ({ assert, client }) => {
-  testRequireField('language_id', article, 'admin/articles', user, assert, client)
+  await testRequireField('language_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that state_id is required`, async ({ assert, client }) => {
-  testRequireField('state_id', article, 'admin/articles', user, assert, client)
+  await testRequireField('state_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that template_id is required`, async ({ assert, client }) => {
-  testRequireField('template_id', article, 'admin/articles', user, assert, client)
+  await testRequireField('template_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that category_id is required`, async ({ assert, client }) => {
-  testRequireField('category_id', article, 'admin/articles', user, assert, client)
+  await testRequireField('category_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that language_id must be a number`, async ({ assert, client }) => {
-  testNumberField('language_id', article, 'admin/articles', user, assert, client)
+  await testNumberField('language_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that state_id must be a number`, async ({ assert, client }) => {
-  testNumberField('state_id', article, 'admin/articles', user, assert, client)
+  await testNumberField('state_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that template_id must be a number`, async ({ assert, client }) => {
-  testNumberField('template_id', article, 'admin/articles', user, assert, client)
+  await testNumberField('template_id', article, 'admin/articles', user, assert, client)
 })
 
 test(`should test that category_id must be a number`, async ({ assert, client }) => {
-  testNumberField('category_id', article, 'admin/articles', user, assert, client)
+  await testNumberField('category_id', article, 'admin/articles', user, assert, client)
 })

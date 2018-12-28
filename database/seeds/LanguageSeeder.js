@@ -1,14 +1,11 @@
 'use strict'
 
-/*
-|--------------------------------------------------------------------------
-| LanguageSeeder
-|--------------------------------------------------------------------------
-|
-| Make use of the Factory instance to seed database with dummy data or
-| make use of Lucid models directly.
-|
-*/
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
 
 const Factory = use('Factory')
 const Language = use('App/Models/Language')

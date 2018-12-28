@@ -1,7 +1,13 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const BaseExceptionHandler = use('BaseExceptionHandler')
-const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
 
 /**
  * This class handles all exceptions thrown during

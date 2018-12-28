@@ -1,5 +1,12 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const Factory = use('Factory')
 const { test, trait } = use('Test/Suite')('Article State Get')
 

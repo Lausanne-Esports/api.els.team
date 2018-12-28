@@ -1,5 +1,12 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 class ConvertEmptyStringsToNull {
   async handle ({ request }, next) {
     if (Object.keys(request.body).length) {

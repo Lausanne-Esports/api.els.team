@@ -1,5 +1,12 @@
 'use strict'
 
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz
+ */
+
 const path = use('path')
 const klaw = use('klaw')
 const Helpers = use('Helpers')
