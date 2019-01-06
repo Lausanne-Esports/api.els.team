@@ -42,7 +42,7 @@ class MarkdownProvider extends ServiceProvider {
       }
 
       return ast
-    })
+    }, false)
   }
 
   /**
@@ -90,16 +90,59 @@ class MarkdownProvider extends ServiceProvider {
     }, true)
   }
 
+  /**
+   * <blockquote class="twitter-tweet">
+   *   <a href="$link"></a>
+   * </blockquote>
+   */
+  $registerMacroTweet () {
+    Markdown.addMacro('tweet', (props) => ({
+      type: 'tweetContainer',
+      data: {
+        hName: 'blockquote',
+        hProperties: {
+          className: ['twitter-tweet'],
+          dataLang: ['fr-FR'],
+        },
+      },
+      children: [{
+        type: 'tweetLink',
+        data: {
+          hName: 'a',
+          hProperties: {
+            href: props.link,
+          },
+        }
+      }],
+    }), true)
+  }
+
+  /**
+   * <center>$content</center>
+   */
+  $registerMacroCenter() {
+    Markdown.addMacro('center', (content, _, { transformer, eat }) => ({
+      type: 'centerNode',
+      data: {
+        hName: 'center',
+      },
+      children: transformer.tokenizeBlock(content, eat.now()),
+    }), false)
+  }
+
   $addTags () {
     whitelist.tagNames.push('figure')
     whitelist.tagNames.push('figcaption')
     whitelist.tagNames.push('footer')
+    whitelist.tagNames.push('center')
   }
 
   register () {
     this.$addTags()
     this.$registerMacroBlockquote()
     this.$registerMacroImage()
+    this.$registerMacroTweet()
+    this.$registerMacroCenter()
 
     this.app.singleton('Markdown', () => {
       return new MarkdownWrapper({
