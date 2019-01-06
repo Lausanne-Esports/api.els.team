@@ -53,7 +53,7 @@ class TeamController {
       }
 
       return {
-        ...pick(member, ['nickname', 'lastname', 'firstname']),
+        ...pick(member, ['nickname', 'lastname', 'firstname', 'picture']),
         role: member.pivot.role,
         socials
       }
