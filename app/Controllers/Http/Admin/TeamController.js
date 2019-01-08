@@ -19,7 +19,6 @@ class TeamController {
     const data = request.only(['name', 'category_id', 'academy', 'activated'])
     const [{ max: maxOrder }] = await Database.from('teams').max('order')
     data.order = maxOrder + 1
-    console.log('maxOrder', maxOrder);
 
     return Team.create(data)
   }
