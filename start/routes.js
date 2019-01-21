@@ -9,7 +9,7 @@
 
 const Route = use('Route')
 
-Route.get('/', () => ({ version: '20190106', uptime: process.uptime() }))
+Route.get('/', () => ({ version: '20190121', uptime: process.uptime() }))
 
 Route.post('contact', 'ContactController.store').validator('Contact')
 Route.post('sessions', 'SessionController.store').validator('SessionStore')
@@ -27,6 +27,9 @@ Route.get('teams', 'TeamController.index')
 Route.get('teams/categories', 'TeamCategoryController.index')
 Route.get('teams/:id', 'TeamController.show')
 
+Route.get('streams', 'StreamController.index')
+Route.get('streams/:id', 'StreamController.show')
+
 Route.group(() => {
   Route.get('me', 'Admin/UserController.current')
   Route.delete('sessions', 'SessionController.destroy')
@@ -38,6 +41,14 @@ Route.group(() => {
 
   Route.get('members', 'MemberController.index')
   Route.get('members/:id', 'MemberController.show')
+
+  //    Streams
+
+  Route.post('streams', 'StreamController.store').validator('StreamStore')
+  Route.put('streams/:id', 'StreamController.update')
+
+  Route.get('streams', 'StreamController.index')
+  Route.get('streams/:id', 'StreamController.show')
 
   // TODO: add validator
   Route.post('members', 'MemberController.store')

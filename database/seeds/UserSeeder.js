@@ -11,7 +11,7 @@ const User = use('App/Models/User')
 
 class UserSeeder {
   async run () {
-    // await User.findOrCreate({ username: 'romain.lanz', email: 'romain.lanz@slynova.ch', password: 'secret', account_status: 'active' })
+    await User.findOrCreate({ username: 'test', email: 'test@test.dev', password: 'secret', account_status: 'active' })
   }
 }
 
