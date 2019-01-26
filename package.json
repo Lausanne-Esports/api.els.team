@@ -21,7 +21,7 @@
     "@adonisjs/vow": "^1.0.17",
     "@dimerapp/markdown": "^3.2.0",
     "adonis-bumblebee": "^1.5.3",
-    "argon2": "^0.20.0",
+    "argon2": "^0.19.3",
     "got": "^9.5.0",
     "heml": "^1.1.3",
     "indicative": "^5.0.8",
