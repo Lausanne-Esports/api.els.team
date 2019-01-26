@@ -7,57 +7,46 @@
  * @copyright Lausanne-Sport eSports - Killian Tornese
  */
 
-const got = require('got');
-const md5 = require('js-md5');
+const got = require('got')
+const Config = use('Config')
+const Cache = use('App/Helpers/Cache')
 
-const Cache = use('App/Helpers/Cache');
+const defaultOptions = {
+  headers: { 'Client-ID': Config.get('twitch.apiKey') },
+  json: true,
+}
 
 class Twitch {
+  async getChannel (channel) {
+    const response = await got.get(`https://api.twitch.tv/kraken/channels/${channel}`, defaultOptions)
 
-  async getChannel(channel) {
-    const resp = await got.get(`https://api.twitch.tv/kraken/channels/${channel}`, {
-      headers: {
-        'Client-ID': process.env.TWITCH_CLIENT
-      },
-      json: true,
-    });
-
-    return resp.body;
+    return response.body
   }
 
-  async getStreams(channels) {
-    const json = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${channels.join()}&limit=100`, {
-      headers: {
-        'Client-ID': process.env.TWITCH_CLIENT
-      },
-      json: true,
-    }).catch(function(error) {
-      return { streams: [] };
-    });
+  async getStreams (channels) {
+    const { streams } = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${channels.join()}&limit=100`, defaultOptions)
 
-    let streams = {};
-    json.streams.forEach(stream => {
-      streams[stream.channel.name] = stream;
-    });
-
-    return streams;
+    return streams.reduce((streams, stream) => {
+      streams[stream.channel.name] = stream
+      return streams
+    }, {})
   }
 
-  async getCached(url, options = {}) {
+  async getCached (url, options = {}) {
+    if (Cache.has(`twitch.${url}`)) {
+      const [stream, timestamp] = Cache.get(`twitch.${url}`)
 
-    if(Cache.has(md5(url))) {
-      const data = Cache.get(md5(url));
-      if((new Date().getTime() - data[1]) / 1000 < 60) {
-        return data[0];
+      if ((Date.now() - timestamp) / 1000 < 60) {
+        return stream
       }
     }
 
-    const resp = await got.get(url, options);
+    const response = await got.get(url, options)
 
-    Cache.set(md5(url), [resp.body, Date.now()]);
-    return resp.body;
+    Cache.set(`twitch.${url}`, [response.body, Date.now()])
+
+    return response.body
   }
-
 }
 
-module.exports = new Twitch;
+module.exports = new Twitch

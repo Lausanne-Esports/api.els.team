@@ -42,17 +42,15 @@ Route.group(() => {
   Route.get('members', 'MemberController.index')
   Route.get('members/:id', 'MemberController.show')
 
-  //    Streams
-
-  Route.post('streams', 'StreamController.store').validator('StreamStore')
-  Route.put('streams/:id', 'StreamController.update')
+  // TODO: add validator
+  Route.post('members', 'MemberController.store')
+  Route.put('members/:id', 'MemberController.update')
 
   Route.get('streams', 'StreamController.index')
   Route.get('streams/:id', 'StreamController.show')
 
-  // TODO: add validator
-  Route.post('members', 'MemberController.store')
-  Route.put('members/:id', 'MemberController.update')
+  Route.post('streams', 'StreamController.store').validator('StreamStore')
+  Route.put('streams/:id', 'StreamController.update')
 
   Route.get('teams', 'TeamController.index')
   Route.get('teams/:id', 'TeamController.show')

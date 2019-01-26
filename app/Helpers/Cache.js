@@ -7,6 +7,6 @@
  * @copyright Lausanne-Sport eSports - Killian Tornese
  */
 
-const Cache = new Map();
+const Cache = new Map()
 
-module.exports = Cache;
+module.exports = Cache
