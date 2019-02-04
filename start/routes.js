@@ -51,6 +51,7 @@ Route.group(() => {
 
   Route.post('streams', 'StreamController.store').validator('StreamStore')
   Route.put('streams/:id', 'StreamController.update')
+  Route.delete('streams/:id', 'StreamController.destroy')
 
   Route.get('teams', 'TeamController.index')
   Route.get('teams/:id', 'TeamController.show')

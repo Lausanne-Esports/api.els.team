@@ -28,7 +28,7 @@ class StreamController {
 
       const stream = await Stream.create({
         twitch_id: channel._id,
-        username: request.input('username'),
+        username: channel.name,
         display_name: channel.display_name,
       })
 
@@ -55,6 +55,12 @@ class StreamController {
     } catch (e) {
       return response.status(400).send(e)
     }
+  }
+
+  async destroy({ params, response }) {
+    await Stream.query().where('id', params.id).delete()
+
+    return response.noContent()
   }
 
   $mergeTwitchData (channels, streams) {
