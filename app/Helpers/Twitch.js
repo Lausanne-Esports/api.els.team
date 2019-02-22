@@ -34,19 +34,13 @@ class Twitch {
   }
 
   async getCached (url, options = {}) {
-    if (Cache.has(`twitch.${url}`)) {
-      const [stream, timestamp] = Cache.get(`twitch.${url}`)
+    if (!Cache.has(`twitch.${url}`) || Cache.isExpired(`twitch.${url}`, 60)) {
+      const response = await got.get(url, options)
 
-      if ((Date.now() - timestamp) / 1000 < 60) {
-        return stream
-      }
+      Cache.set(`twitch.${url}`, response.body)
     }
 
-    const response = await got.get(url, options)
-
-    Cache.set(`twitch.${url}`, [response.body, Date.now()])
-
-    return response.body
+    return Cache.get(`twitch.${url}`)
   }
 }
 
