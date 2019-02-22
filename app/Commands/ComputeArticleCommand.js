@@ -27,7 +27,7 @@ class ComputeArticleCommand extends Command {
     const translations = await ArticleTranslation.all()
 
     for (const translation of translations.rows) {
-      translation.html = await Markdown.renderToHtml(translation.body)
+      translation.html = await Markdown.toHtml(translation.body)
       await translation.save()
     }
 

@@ -15,7 +15,7 @@ class ArticleTranslation extends Model {
     super.boot()
 
     this.addHook('beforeSave', async (instance) => {
-      instance.html = await Markdown.renderToHtml(instance.body)
+      instance.html = await Markdown.toHtml(instance.body)
     })
   }
 
