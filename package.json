@@ -30,6 +30,7 @@
     "rehype-minify-whitespace": "^2.0.3",
     "rehype-stringify": "^5.0.0",
     "remark": "^10.0.1",
+    "remark-external-links": "^4.0.0",
     "remark-macro": "^1.0.7",
     "remark-parse": "^6.0.3",
     "remark-rehype": "^4.0.0",

@@ -12,6 +12,7 @@ const remarkParser = require('remark-parse')
 const macroEngine = require('remark-macro')()
 const stringify = require('rehype-stringify')
 const remarkToRehype = require('remark-rehype')
+const externalLinks = require('remark-external-links')
 const squeezeParagraphs = require('remark-squeeze-paragraphs')
 const minifyWhiteSpace = require('rehype-minify-whitespace')
 
@@ -46,6 +47,7 @@ class MarkdownProcessor {
       .use(remarkParser)
       .use(macroEngine.transformer)
       .use(squeezeParagraphs)
+      .use(externalLinks)
       .use(remarkToRehype)
       .use(minifyWhiteSpace)
   }
