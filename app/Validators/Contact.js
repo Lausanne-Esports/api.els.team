@@ -10,9 +10,9 @@
 class Contact {
   get rules () {
     return {
-      'title': 'required',
-      'email': 'required|email',
-      'message': 'required',
+      title: 'required',
+      email: 'required|email',
+      message: 'required',
     }
   }
 }

@@ -13,7 +13,7 @@ const Twitch = use('App/Helpers/Twitch')
 class StreamController {
   async index () {
     const channels = await Stream.query().orderBy('username').fetch()
-    const streams = await Twitch.getStreams(channels.toJSON().map(x => x['username']))
+    const streams = await Twitch.getStreams(channels.toJSON().map(x => x.username))
 
     return this.$mergeTwitchData(channels.toJSON(), streams)
   }
@@ -26,8 +26,8 @@ class StreamController {
   }
 
   $mergeTwitchData (channels, streams) {
-    channels.forEach(channel => {
-      if(streams[channel.username] !== undefined) {
+    channels.forEach((channel) => {
+      if (streams[channel.username] !== undefined) {
         const stream = streams[channel.username]
 
         channel.is_live = true

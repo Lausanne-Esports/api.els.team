@@ -31,7 +31,7 @@ module.exports = {
   |
   */
   bcrypt: {
-    rounds: 10
+    rounds: 10,
   },
 
   /*
@@ -50,6 +50,6 @@ module.exports = {
   |
   */
   argon: {
-    type: 1
-  }
+    type: 1,
+  },
 }

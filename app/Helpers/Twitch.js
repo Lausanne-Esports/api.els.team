@@ -8,6 +8,7 @@
  */
 
 const got = require('got')
+
 const Config = use('Config')
 const Cache = use('App/Helpers/Cache')
 
@@ -49,4 +50,4 @@ class Twitch {
   }
 }
 
-module.exports = new Twitch
+module.exports = new Twitch()

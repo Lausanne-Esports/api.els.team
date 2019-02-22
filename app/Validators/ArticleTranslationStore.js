@@ -18,13 +18,13 @@ class ArticleTranslationStore {
     return true
   }
 
-get rules () {
-  const articleId = this.ctx.params.id
+  get rules () {
+    const articleId = this.ctx.params.id
 
-  return {
-    language_id: `uniqueScope:article_translations,article_id,${articleId}`
+    return {
+      language_id: `uniqueScope:article_translations,article_id,${articleId}`,
+    }
   }
-}
 }
 
 module.exports = ArticleTranslationStore

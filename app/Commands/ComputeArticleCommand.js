@@ -1,5 +1,7 @@
 'use strict'
 
+/* eslint-disable no-await-in-loop */
+
 /**
  * Lausanne-Sport eSports API Source Code.
  *
@@ -21,7 +23,7 @@ class ComputeArticleCommand extends Command {
     return 'Compute the markdown of all article.'
   }
 
-  async handle (args, options) {
+  async handle () {
     const translations = await ArticleTranslation.all()
 
     for (const translation of translations.rows) {

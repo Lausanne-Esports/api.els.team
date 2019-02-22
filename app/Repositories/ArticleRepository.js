@@ -35,7 +35,7 @@ class ArticleRepository {
     const article = await this.Article.query()
       .published()
       .with('translations.language')
-      .with('translations', (builder) => (
+      .with('translations', builder => (
         builder
           .select(['language_id', 'article_id'])
           .where('state_id', 4)

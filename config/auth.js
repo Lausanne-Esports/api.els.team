@@ -38,7 +38,7 @@ module.exports = {
     model: 'App/Models/User',
     scheme: 'session',
     uid: 'email',
-    password: 'password'
+    password: 'password',
   },
 
   /*
@@ -59,7 +59,7 @@ module.exports = {
     model: 'App/Models/User',
     scheme: 'basic',
     uid: 'email',
-    password: 'password'
+    password: 'password',
   },
 
   /*
@@ -79,6 +79,6 @@ module.exports = {
     password: 'password',
     options: {
       secret: Env.get('APP_KEY'),
-    }
-  }
+    },
+  },
 }

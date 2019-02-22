@@ -25,7 +25,7 @@ const articleSchema = {
   'translations.*.language_id': 'number',
 }
 
-test('should be able to get an article', async ({ assert, client }) => {
+test('should be able to get an article', async ({ client }) => {
   const article = await Factory.model('App/Models/Article').create()
   const translation = await Factory.model('App/Models/ArticleTranslation').make()
 
@@ -39,7 +39,7 @@ test('should be able to get an article', async ({ assert, client }) => {
   await validateAll(response.body, articleSchema)
 })
 
-test('shouldn\'t be able to get an article that has no translation published', async ({ assert, client }) => {
+test('shouldn\'t be able to get an article that has no translation published', async ({ client }) => {
   const article = await Factory.model('App/Models/Article').create()
   const translation = await Factory.model('App/Models/ArticleTranslation').make({ state_id: 1 })
 

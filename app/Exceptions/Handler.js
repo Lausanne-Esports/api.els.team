@@ -27,14 +27,14 @@ class ExceptionHandler extends BaseExceptionHandler {
    *
    * @return {void}
    */
-  async handle (error, { request, response }) {
+  async handle (error, { response }) {
     if (error.code === 'E_INVALID_CREDENTIAL') {
       return response.status(error.status).send({
         errors: [{
-          "status": error.status,
-          "code": error.code,
-          "detail": error.message,
-        }]
+          status: error.status,
+          code: error.code,
+          detail: error.message,
+        }],
       })
     }
 
@@ -49,19 +49,6 @@ class ExceptionHandler extends BaseExceptionHandler {
     }
 
     return super.handle(...arguments)
-  }
-
-  /**
-   * Report exception for logging or debugging.
-   *
-   * @method report
-   *
-   * @param  {Object} error
-   * @param  {Object} options.request
-   *
-   * @return {void}
-   */
-  async report (error, { request }) {
   }
 }
 

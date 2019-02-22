@@ -7,7 +7,7 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const ArticleCategory = use('App/Models/ArticleCategory')
+// const ArticleCategory = use('App/Models/ArticleCategory')
 
 class ArticleCategorySeeder {
   async run () {

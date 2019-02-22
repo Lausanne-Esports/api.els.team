@@ -13,7 +13,7 @@ const { test, trait } = use('Test/Suite')('Session Store')
 trait('Test/ApiClient')
 trait('DatabaseTransactions')
 
-test('should be able to signin', async ({ assert, client }) => {
+test('should be able to signin', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create()
 
   const response = await client
@@ -30,7 +30,7 @@ test('should be able to signin', async ({ assert, client }) => {
   })
 })
 
-test('should throw invalid credential when uid is incorrect', async ({ assert, client }) => {
+test('should throw invalid credential when uid is incorrect', async ({ client }) => {
   const response = await client
     .post('sessions')
     .send({
@@ -45,11 +45,11 @@ test('should throw invalid credential when uid is incorrect', async ({ assert, c
       status: 401,
       code: 'E_INVALID_CREDENTIAL',
       detail: 'E_INVALID_CREDENTIAL: Authentication failed. Either supplied credentials are invalid or the account is inactive',
-    }]
+    }],
   })
 })
 
-test('should throw invalid credential when password is incorrect', async ({ assert, client }) => {
+test('should throw invalid credential when password is incorrect', async ({ client }) => {
   const user = await Factory.model('App/Models/User').create()
 
   const response = await client
@@ -66,15 +66,15 @@ test('should throw invalid credential when password is incorrect', async ({ asse
       status: 401,
       code: 'E_INVALID_CREDENTIAL',
       detail: 'E_INVALID_CREDENTIAL: Authentication failed. Either supplied credentials are invalid or the account is inactive',
-    }]
+    }],
   })
 })
 
-test('should test that uid is required', async ({ assert, client }) => {
+test('should test that uid is required', async ({ client }) => {
   const response = await client
     .post('sessions')
     .send({
-      password: 'ThisIsntGoingToWork'
+      password: 'ThisIsntGoingToWork',
     })
     .end()
 
@@ -83,11 +83,11 @@ test('should test that uid is required', async ({ assert, client }) => {
     errors: [{
       source: { pointer: 'uid' },
       title: 'required',
-    }]
+    }],
   })
 })
 
-test('should test that password is required', async ({ assert, client }) => {
+test('should test that password is required', async ({ client }) => {
   const response = await client
     .post('sessions')
     .send({
@@ -100,11 +100,11 @@ test('should test that password is required', async ({ assert, client }) => {
     errors: [{
       source: { pointer: 'password' },
       title: 'required',
-    }]
+    }],
   })
 })
 
-test('should test that all errors are sent back', async ({ assert, client }) => {
+test('should test that all errors are sent back', async ({ client }) => {
   const response = await client
     .post('sessions')
     .send({})
@@ -115,6 +115,6 @@ test('should test that all errors are sent back', async ({ assert, client }) => 
     errors: [
       { source: { pointer: 'uid' }, title: 'required' },
       { source: { pointer: 'password' }, title: 'required' },
-    ]
+    ],
   })
 })

@@ -21,6 +21,6 @@ module.exports = async function testRequireField (field, data, endpoint, user, a
     errors: [{
       source: { pointer: field },
       title: 'required',
-    }]
+    }],
   })
 }

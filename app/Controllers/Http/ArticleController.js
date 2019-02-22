@@ -30,7 +30,7 @@ class ArticleController {
     this.translationRepository = TranslationRepository
   }
 
-  async index ({ auth, request }) {
+  async index ({ request }) {
     const query = Article.query()
       .published()
       .whereHas('translations', (builder) => {
@@ -63,7 +63,7 @@ class ArticleController {
   async show ({ params, request, transform }) {
     const [language, article] = await Promise.all([
       Language.findByOrFail('code', request.input('lang', 'fr')),
-      this.articleRepository.get(params.id)
+      this.articleRepository.get(params.id),
     ])
     const translation = await this.translationRepository.get(article.id, language.id)
 

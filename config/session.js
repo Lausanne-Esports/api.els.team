@@ -73,7 +73,7 @@ module.exports = {
     httpOnly: true,
     path: '/',
     domain: Env.get('COOKIE_DOMAIN', 'els.team'),
-    sameSite: false
+    sameSite: false,
   },
 
   /*
@@ -86,7 +86,7 @@ module.exports = {
   |
   */
   file: {
-    location: 'sessions'
+    location: 'sessions',
   },
 
   /*
@@ -102,6 +102,6 @@ module.exports = {
     port: 6379,
     password: null,
     db: 0,
-    keyPrefix: ''
-  }
+    keyPrefix: '',
+  },
 }

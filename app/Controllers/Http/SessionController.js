@@ -15,7 +15,7 @@ class SessionController {
     const payload = request.only(['uid', 'password'])
 
     const user = await Persona.verify(payload)
-      .catch((e) => {
+      .catch(() => {
         throw new InvalidCredential('Authentication failed. Either supplied credentials are invalid or the account is inactive', 401, 'E_INVALID_CREDENTIAL')
       })
 

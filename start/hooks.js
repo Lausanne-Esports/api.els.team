@@ -21,12 +21,12 @@ hooks.after.providersBooted(() => {
         return
       }
 
-      const [table, scope_field, id] = args
+      const [table, scopeField, id] = args
       const query = Database
         .table(table)
         .select(field)
         .where(field, value)
-        .where(scope_field, id)
+        .where(scopeField, id)
 
       query.then((rows) => {
         if (rows && rows.length) {

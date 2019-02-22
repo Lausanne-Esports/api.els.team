@@ -43,7 +43,7 @@ const globalMiddleware = [
 |
 */
 const namedMiddleware = {
-  auth: 'Adonis/Middleware/Auth'
+  auth: 'Adonis/Middleware/Auth',
 }
 
 /*
@@ -57,7 +57,7 @@ const namedMiddleware = {
 |
 */
 const serverMiddleware = [
-  'Adonis/Middleware/Cors'
+  'Adonis/Middleware/Cors',
 ]
 
 Server

@@ -7,7 +7,7 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const TeamCategory = use('App/Models/TeamCategory')
+// const TeamCategory = use('App/Models/TeamCategory')
 
 class TeamCategorySeeder {
   async run () {

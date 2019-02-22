@@ -30,7 +30,7 @@ class TranslationRepository {
       .firstOrFail()
 
     // Increments the view counter
-    translation.view_count++
+    translation.view_count += 1
     await translation.save()
 
     return translation

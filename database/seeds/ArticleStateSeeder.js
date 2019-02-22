@@ -7,7 +7,6 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Factory = use('Factory')
 const ArticleState = use('App/Models/ArticleState')
 
 class ArticleStateSeeder {

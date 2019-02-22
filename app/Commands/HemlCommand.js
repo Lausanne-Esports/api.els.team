@@ -26,7 +26,7 @@ class HemlCommand extends Command {
       const files = []
 
       klaw(Helpers.resourcesPath('emails'))
-        .on('data', function (item) {
+        .on('data', (item) => {
           if (item.stats.isDirectory()) {
             return
           }
@@ -46,24 +46,22 @@ class HemlCommand extends Command {
 
     const content = await this.readFile(file, 'utf-8')
     const { html, metadata, errors } = await heml(content, {
-      juice: {}
+      juice: {},
     })
 
     if (errors.length) {
-      console.log(errors)
+      this.error(errors)
       return
     }
 
     const baseName = file.replace(Helpers.resourcesPath('emails/'), '').replace('.heml', '.edge')
     await this.writeFile(Helpers.viewsPath(`emails/${baseName}`), html)
-    console.log(`Created email ${this.chalk.dim(baseName)} with ${this.chalk.dim(metadata.subject)} subject`)
+    this.success(`Created email ${this.chalk.dim(baseName)} with ${this.chalk.dim(metadata.subject)} subject`)
   }
 
-  async handle ({ dev }, options) {
+  async handle () {
     const files = await this.getEmailFiles()
-    await Promise.all(files.map((file) => {
-      return this.compileFile(file)
-    }))
+    await Promise.all(files.map(file => this.compileFile(file)))
   }
 }
 

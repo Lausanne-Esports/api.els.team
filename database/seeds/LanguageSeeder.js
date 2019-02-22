@@ -7,7 +7,6 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Factory = use('Factory')
 const Language = use('App/Models/Language')
 
 class LanguageSeeder {

@@ -43,7 +43,7 @@ class MemberTransformer extends TransformerAbstract {
       firstname: member.firstname,
       picture: member.picture,
       role: member.getRelated('pivot').role,
-      socials
+      socials,
     }
   }
 }

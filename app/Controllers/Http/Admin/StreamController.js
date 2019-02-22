@@ -13,7 +13,7 @@ const Twitch = use('App/Helpers/Twitch')
 class StreamController {
   async index () {
     const channels = await Stream.query().orderBy('username').fetch()
-    const streams = await Twitch.getStreams(channels.toJSON().map(x => x['username']))
+    const streams = await Twitch.getStreams(channels.toJSON().map(x => x.username))
 
     return this.$mergeTwitchData(channels.toJSON(), streams)
   }
@@ -57,14 +57,14 @@ class StreamController {
     }
   }
 
-  async destroy({ params, response }) {
+  async destroy ({ params, response }) {
     await Stream.query().where('id', params.id).delete()
 
     return response.noContent()
   }
 
   $mergeTwitchData (channels, streams) {
-    channels.forEach(channel => {
+    channels.forEach((channel) => {
       if (streams[channel.username] !== undefined) {
         channel.is_live = true
         channel.status = streams[channel.username].channel.status
@@ -76,7 +76,7 @@ class StreamController {
       }
     })
 
-    return channels;
+    return channels
   }
 }
 

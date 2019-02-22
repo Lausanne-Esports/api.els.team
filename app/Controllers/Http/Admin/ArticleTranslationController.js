@@ -55,7 +55,7 @@ class ArticleTranslationController {
 
   $getFormField (request) {
     return request.only([
-      'headline', 'description', 'body', 'language_id', 'state_id'
+      'headline', 'description', 'body', 'language_id', 'state_id',
     ])
   }
 }

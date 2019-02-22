@@ -85,7 +85,7 @@ module.exports = {
     | response.send('Hello', { ignoreEtag: true })
     |
     */
-    etag: true
+    etag: true,
   },
 
   static: {
@@ -124,7 +124,7 @@ module.exports = {
     | that exists will be served. Example: ['html', 'htm'].
     |
     */
-    extensions: false
+    extensions: false,
   },
 
   locales: {
@@ -151,7 +151,7 @@ module.exports = {
     | based on HTTP headers/query string.
     |
     */
-    locale: 'en'
+    locale: 'en',
   },
 
   logger: {
@@ -180,7 +180,7 @@ module.exports = {
     console: {
       driver: 'console',
       name: 'adonis-app',
-      level: 'info'
+      level: 'info',
     },
 
     /*
@@ -198,7 +198,7 @@ module.exports = {
       driver: 'file',
       name: 'adonis-app',
       filename: 'adonis.log',
-      level: 'info'
-    }
-  }
+      level: 'info',
+    },
+  },
 }

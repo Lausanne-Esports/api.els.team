@@ -80,4 +80,6 @@ const commands = [
   'App/Commands/HemlCommand',
 ]
 
-module.exports = { providers, aceProviders, aliases, commands }
+module.exports = {
+  providers, aceProviders, aliases, commands,
+}

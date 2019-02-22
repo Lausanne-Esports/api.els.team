@@ -21,6 +21,6 @@ module.exports = async function testNumberField (field, data, endpoint, user, as
     errors: [{
       source: { pointer: field },
       title: 'number',
-    }]
+    }],
   })
 }

@@ -7,11 +7,16 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Member = use('App/Models/Member')
+// const Member = use('App/Models/Member')
 
 class MemberSeeder {
   async run () {
-    // await Member.findOrCreate({ nickname: 'SlyK', lastname: 'Lanz', firstname: 'Romain', twitter: 'romainlanz' })
+    // await Member.findOrCreate({
+    //   nickname: 'SlyK',
+    //   lastname: 'Lanz',
+    //   firstname: 'Romain',
+    //   twitter: 'romainlanz'
+    // })
   }
 }
 

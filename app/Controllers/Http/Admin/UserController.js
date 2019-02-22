@@ -24,8 +24,7 @@ class UserController {
 
   async store ({ request, response }) {
     const payload = request.only([
-      'username', 'email', 'password', 'password_confirmation']
-    )
+      'username', 'email', 'password', 'password_confirmation'])
 
     const user = await Persona.register(payload)
 
@@ -36,11 +35,9 @@ class UserController {
     })
   }
 
-  async validate ({ auth, request, response }) {
+  async validate ({ request, response }) {
     const token = Encryption.base64Decode(request.input('token'))
-    const user = await Persona.verifyEmail(token)
-
-    // await auth.login(user)
+    await Persona.verifyEmail(token)
 
     return response.ok({
       status: 200,

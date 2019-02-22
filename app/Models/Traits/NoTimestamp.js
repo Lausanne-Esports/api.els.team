@@ -10,11 +10,11 @@
 class NoTimestamp {
   register (Model) {
     Object.defineProperty(Model, 'createdAtColumn', {
-      get () { return null }
+      get () { return null },
     })
 
     Object.defineProperty(Model, 'updatedAtColumn', {
-      get () { return null }
+      get () { return null },
     })
   }
 }

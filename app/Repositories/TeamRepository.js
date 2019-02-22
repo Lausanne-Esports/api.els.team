@@ -7,8 +7,6 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const ModelNotFound = use('App/Exceptions/ModelNotFoundException')
-
 class TeamRepository {
   /**
    * Injecting required dependencies auto

@@ -25,5 +25,5 @@ module.exports = {
    * into it's final representation.
    * Currently supported: 'plain', 'data'
    */
-  serializer: 'plain'
+  serializer: 'plain',
 }

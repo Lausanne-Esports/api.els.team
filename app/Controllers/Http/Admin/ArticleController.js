@@ -30,7 +30,7 @@ class ArticleController {
     const translation = this.$getTranslationData(request)
 
     const globalTrx = Database.connection('pg')._globalTrx
-    const trx =  globalTrx ? globalTrx : await Database.beginTransaction()
+    const trx = globalTrx || await Database.beginTransaction()
 
     const article = await Article.create(metadata, trx)
     await article.translations().create(translation, trx)
@@ -76,7 +76,7 @@ class ArticleController {
 
   $getTranslationData (request) {
     return request.only([
-      'headline', 'description', 'body', 'language_id', 'state_id'
+      'headline', 'description', 'body', 'language_id', 'state_id',
     ])
   }
 }

@@ -10,7 +10,7 @@
 class Stream {
   get rules () {
     return {
-      username: 'required|unique:streams,username'
+      username: 'required|unique:streams,username',
     }
   }
 }

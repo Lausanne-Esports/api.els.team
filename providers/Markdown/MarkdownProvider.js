@@ -8,9 +8,9 @@
  */
 
 const whitelist = require('@dimerapp/markdown/github')
-const MarkdownWrapper = require('./Markdown')
 const Markdown = require('@dimerapp/markdown')
 const { ServiceProvider } = require('@adonisjs/fold')
+const MarkdownWrapper = require('./Markdown')
 
 class MarkdownProvider extends ServiceProvider {
   /**
@@ -37,7 +37,7 @@ class MarkdownProvider extends ServiceProvider {
           children: [{
             type: 'text',
             value: props.source,
-          }]
+          }],
         })
       }
 
@@ -69,7 +69,7 @@ class MarkdownProvider extends ServiceProvider {
             hName: 'img',
             hProperties: {
               src: props.src,
-              alt: props.legend || ''
+              alt: props.legend || '',
             },
           },
         }],
@@ -96,7 +96,7 @@ class MarkdownProvider extends ServiceProvider {
    * </blockquote>
    */
   $registerMacroTweet () {
-    Markdown.addMacro('tweet', (props) => ({
+    Markdown.addMacro('tweet', props => ({
       type: 'tweetContainer',
       data: {
         hName: 'blockquote',
@@ -112,7 +112,7 @@ class MarkdownProvider extends ServiceProvider {
           hProperties: {
             href: props.link,
           },
-        }
+        },
       }],
     }), true)
   }
@@ -120,7 +120,7 @@ class MarkdownProvider extends ServiceProvider {
   /**
    * <center>$content</center>
    */
-  $registerMacroCenter() {
+  $registerMacroCenter () {
     Markdown.addMacro('center', (content, _, { transformer, eat }) => ({
       type: 'centerNode',
       data: {
@@ -144,11 +144,9 @@ class MarkdownProvider extends ServiceProvider {
     this.$registerMacroTweet()
     this.$registerMacroCenter()
 
-    this.app.singleton('Markdown', () => {
-      return new MarkdownWrapper({
-        // options
-      })
-    })
+    this.app.singleton('Markdown', () => new MarkdownWrapper({
+      // options
+    }))
   }
 }
 
