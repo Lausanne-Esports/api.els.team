@@ -10,9 +10,10 @@
 const unified = require('unified')
 const remarkParser = require('remark-parse')
 const macroEngine = require('remark-macro')()
-const squeezeParagraphs = require('remark-squeeze-paragraphs')
-const remarkToRehype = require('remark-rehype')
 const stringify = require('rehype-stringify')
+const remarkToRehype = require('remark-rehype')
+const squeezeParagraphs = require('remark-squeeze-paragraphs')
+const minifyWhiteSpace = require('rehype-minify-whitespace')
 
 class MarkdownProcessor {
   constructor (markdown, options = {}) {
@@ -46,6 +47,7 @@ class MarkdownProcessor {
       .use(macroEngine.transformer)
       .use(squeezeParagraphs)
       .use(remarkToRehype)
+      .use(minifyWhiteSpace)
   }
 
   renderToHtml () {

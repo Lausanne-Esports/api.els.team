@@ -27,6 +27,7 @@
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "pg": "^7.8.1",
+    "rehype-minify-whitespace": "^2.0.3",
     "rehype-stringify": "^5.0.0",
     "remark": "^10.0.1",
     "remark-macro": "^1.0.7",
