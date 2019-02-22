@@ -16,7 +16,7 @@ const ArticleTranslation = use('App/Models/ArticleTranslation')
 
 class ComputeArticleCommand extends Command {
   static get signature () {
-    return 'compute:article'
+    return 'compute:articles'
   }
 
   static get description () {
