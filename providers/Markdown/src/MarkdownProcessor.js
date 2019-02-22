@@ -17,9 +17,8 @@ const squeezeParagraphs = require('remark-squeeze-paragraphs')
 const minifyWhiteSpace = require('rehype-minify-whitespace')
 
 class MarkdownProcessor {
-  constructor (markdown, options = {}) {
+  constructor (markdown) {
     this.markdown = markdown
-    this.options = options
   }
 
   /**
@@ -36,8 +35,8 @@ class MarkdownProcessor {
     macroEngine.addMacro(name, callback, inline)
   }
 
-  static async toHtml (markdown, options) {
-    const markdownProcessor = new this(markdown, options)
+  static async toHtml (markdown) {
+    const markdownProcessor = new this(markdown)
 
     return (await markdownProcessor.renderToHtml()).contents
   }
