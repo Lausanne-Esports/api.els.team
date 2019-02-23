@@ -56,6 +56,7 @@
       "make": true
     },
     "rules": {
+      "object-curly-newline": "off",
       "no-restricted-syntax": "off",
       "no-underscore-dangle": "off",
       "prefer-rest-params": "off",

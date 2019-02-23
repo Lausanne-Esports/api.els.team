@@ -7,8 +7,8 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const Article = use('App/Models/Article')
 const Language = use('App/Models/Language')
+const ArticleTransformer = use('App/Transformers/ArticleTransformer')
 const ArticleItemTransformer = use('App/Transformers/ArticleItemTransformer')
 
 class ArticleController {
@@ -30,42 +30,28 @@ class ArticleController {
     this.translationRepository = TranslationRepository
   }
 
-  async index ({ request }) {
-    const query = Article.query()
-      .published()
-      .whereHas('translations', (builder) => {
-        builder.where('state_id', 4)
-      })
-      .with('translations.language')
-      .with('translations', (builder) => {
-        builder.select(['headline', 'state_id', 'language_id', 'article_id'])
-          .where('state_id', 4)
-      })
-      .with('category')
-      .orderBy('published_at', 'desc')
+  async index ({ auth, request, transform }) {
+    const isAuthenticated = await auth.check().catch(() => {})
 
+    const articles = await this.articleRepository.getAll({
+      isAuthenticated,
+      request,
+    })
 
-    if (request.input('filter') && request.input('filter') !== 'featured') {
-      query.whereHas('category', (builder) => {
-        builder.where('code', request.input('filter'))
-      })
-    } else if (request.input('filter') === 'featured') {
-      query.where('featured', true)
-    }
-
-    if (request.input('limit')) {
-      query.limit(request.input('limit'))
-    }
-
-    return query.fetch()
+    return transform.collection(articles, ArticleTransformer)
   }
 
-  async show ({ params, request, transform }) {
+  async show ({ auth, params, request, transform }) {
+    const isAuthenticated = await auth.check().catch(() => {})
+
     const [language, article] = await Promise.all([
       Language.findByOrFail('code', request.input('lang', 'fr')),
-      this.articleRepository.get(params.id),
+      this.articleRepository.get(params.id, { isAuthenticated }),
     ])
-    const translation = await this.translationRepository.get(article.id, language.id)
+
+    const translation = await this.translationRepository.get(
+      article.id, language.id, { isAuthenticated },
+    )
 
     return transform.item(article)
       .transformWith(ArticleItemTransformer)

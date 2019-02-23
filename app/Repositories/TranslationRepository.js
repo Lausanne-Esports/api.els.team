@@ -22,12 +22,16 @@ class TranslationRepository {
     this.Translation = Translation
   }
 
-  async get (articleId, langId) {
-    const translation = await this.Translation.query()
+  async get (articleId, langId, { isAuthenticated = false }) {
+    const query = this.Translation.query()
       .where('language_id', langId)
       .where('article_id', articleId)
-      .where('state_id', 4)
-      .firstOrFail()
+
+    if (!isAuthenticated) {
+      query.where('state_id', 4)
+    }
+
+    const translation = await query.firstOrFail()
 
     // Increments the view counter
     translation.view_count += 1
