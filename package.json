@@ -21,7 +21,7 @@
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/vow": "^1.0.17",
     "adonis-bumblebee": "^1.5.3",
-    "argon2": "^0.20.1",
+    "argon2": "^0.21.0",
     "got": "^9.5.0",
     "indicative": "^5.0.8",
     "lodash": "^4.17.11",
