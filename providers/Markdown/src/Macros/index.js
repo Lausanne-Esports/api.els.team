@@ -7,4 +7,5 @@ module.exports = {
   center: require('./center'),
   image: require('./image'),
   tweet: require('./tweet'),
+  youtube: require('./youtube'),
 }
