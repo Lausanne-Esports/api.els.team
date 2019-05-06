@@ -17,7 +17,7 @@ class MarkdownProvider extends ServiceProvider {
     MarkdownProcessor.addMacro('center', macros.center, false)
     MarkdownProcessor.addMacro('image', macros.image, true)
     MarkdownProcessor.addMacro('tweet', macros.tweet, true)
-    MarkdoownProcessor.addMacro('youtubge', macros.youtube, true)
+    MarkdownProcessor.addMacro('youtubge', macros.youtube, true)
   }
 
   register () {
