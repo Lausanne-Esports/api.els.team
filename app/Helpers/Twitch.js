@@ -13,7 +13,10 @@ const Config = use('Config')
 const Cache = use('App/Helpers/Cache')
 
 const defaultOptions = {
-  headers: { 'Client-ID': Config.get('twitch.apiKey') },
+  headers: {
+    'Accept': 'application/vnd.twitchtv.v5+json',
+    'Client-ID': Config.get('twitch.apiKey'),
+  },
   json: true,
 }
 
