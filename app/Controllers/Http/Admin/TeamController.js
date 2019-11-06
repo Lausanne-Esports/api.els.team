@@ -17,7 +17,7 @@ class TeamController {
 
   async store ({ request }) {
     const data = request.only(['name', 'category_id', 'academy', 'activated'])
-    const [{ max: maxOrder }] = await Database.from('teams').max('order')
+    const [{ 'max(`order`)': maxOrder }] = await Database.from('teams').max('order')
 
     data.order = maxOrder + 1 || 1
 

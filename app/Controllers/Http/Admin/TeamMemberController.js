@@ -24,7 +24,7 @@ class TeamMemberController {
       Member.findOrFail(request.input('member_id')),
     ])
 
-    const [{ max: maxOrder }] = await Database.from('member_team').where('team_id', team.id).max('order')
+    const [{ 'max(`order`)': maxOrder }] = await Database.from('member_team').where('team_id', team.id).max('order')
 
     await team.members().attach([member.id], (row) => {
       row.role = request.input('role')
