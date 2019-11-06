@@ -37,32 +37,21 @@ class TeamController {
     return response.noContent()
   }
 
-  async up ({ params, response }) {
-    const team = await Team.findOrFail(params.id)
-    const teamToSwap = await Team.findByOrFail('order', team.order - 1)
+  async order ({ request, response }) {
+    const { order: newOrder } = request.only('order')
+    const teams = await Team.all()
+    const updates = []
 
-    team.order -= 1
-    teamToSwap.order += 1
+    for (const order of newOrder) {
+      const team = teams.rows.find(team => team.$attributes.id === order.id)
 
-    await Promise.all([
-      team.save(),
-      teamToSwap.save(),
-    ])
+      if (team.order !== order.order) {
+        team.order = order.order
+        updates.push(team.save())
+      }
+    }
 
-    return response.noContent()
-  }
-
-  async down ({ params, response }) {
-    const team = await Team.findOrFail(params.id)
-    const teamToSwap = await Team.findByOrFail('order', team.order + 1)
-
-    team.order += 1
-    teamToSwap.order -= 1
-
-    await Promise.all([
-      team.save(),
-      teamToSwap.save(),
-    ])
+    await Promise.all(updates)
 
     return response.noContent()
   }
