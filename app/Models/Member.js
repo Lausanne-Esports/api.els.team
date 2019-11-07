@@ -10,11 +10,6 @@
 const Model = use('Model')
 
 class Member extends Model {
-  static boot () {
-    super.boot()
-    this.addTrait('FormatDate')
-  }
-
   static get dates () {
     return super.dates.concat(['birth_on'])
   }

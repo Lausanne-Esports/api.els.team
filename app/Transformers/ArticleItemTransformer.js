@@ -7,7 +7,6 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz
  */
 
-const moment = use('moment')
 const TransformerAbstract = use('TransformerAbstract')
 
 class ArticleItemTransformer extends TransformerAbstract {
@@ -31,7 +30,7 @@ class ArticleItemTransformer extends TransformerAbstract {
       headline: translation.headline,
       description: translation.description,
       body: translation.html,
-      published_at: moment(article.published_at).format('DD.MM.YYYY HH:mm'),
+      published_at: article.published_at,
       thumbnail: article.thumbnail,
       featured_thumbnail: article.featured_thumbnail,
       template_id: article.template_id,

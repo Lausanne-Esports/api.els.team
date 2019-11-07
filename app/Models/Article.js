@@ -11,11 +11,6 @@ const Model = use('Model')
 const moment = require('moment')
 
 class Article extends Model {
-  static boot () {
-    super.boot()
-    this.addTrait('FormatDate')
-  }
-
   static scopePublished (query) {
     return query
       .where('published_at', '<', moment().format('YYYY-MM-DD HH:mm:ss'))
