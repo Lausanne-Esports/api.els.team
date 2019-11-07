@@ -45,33 +45,18 @@ class TeamMemberController {
     return response.noContent()
   }
 
-  async up ({ params, response }) {
-    const team = await Team.findOrFail(params.id)
-    const member = await team.members().where('member_id', params.memberId).first()
-    const oldOrder = member.toJSON().__meta__.pivot_order
-    const newOrder = member.toJSON().__meta__.pivot_order - 1
+  async order ({ params, request, response }) {
+    const { order: newOrder } = request.only('order')
+    const teams = await Team.query().with('members').where('id', params.id).first()
+    const updates = []
 
-    const memberToSwap = await team.members().where('order', newOrder).first()
+    for (const order of newOrder) {
+      updates.push(
+        teams.members().pivotQuery().where('member_id', order.id).update({ order: order.order })
+      )
+    }
 
-    await Promise.all([
-      team.members().pivotQuery().where('member_id', member.id).update({ order: newOrder }),
-      team.members().pivotQuery().where('member_id', memberToSwap.id).update({ order: oldOrder }),
-    ])
-
-    return response.noContent()
-  }
-
-  async down ({ params, response }) {
-    const team = await Team.findOrFail(params.id)
-    const teamToSwap = await Team.findByOrFail('order', team.order + 1)
-
-    team.order += 1
-    teamToSwap.order -= 1
-
-    await Promise.all([
-      team.save(),
-      teamToSwap.save(),
-    ])
+    await Promise.all(updates)
 
     return response.noContent()
   }
