@@ -16,7 +16,7 @@ class Member extends Model {
 
   teams () {
     return this.belongsToMany('App/Models/Team')
-      .withPivot(['role', 'order']).pivotPrimaryKey(null)
+      .withPivot(['role', 'order', 'academy']).pivotPrimaryKey(null)
   }
 }
 

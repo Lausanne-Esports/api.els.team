@@ -29,6 +29,7 @@ class TeamMemberController {
     await team.members().attach([member.id], (row) => {
       row.role = request.input('role')
       row.order = maxOrder + 1 || 1
+      row.academy = request.input('academy')
     })
 
     return response.noContent()
