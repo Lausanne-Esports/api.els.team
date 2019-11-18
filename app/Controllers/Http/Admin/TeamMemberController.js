@@ -53,8 +53,12 @@ class TeamMemberController {
 
     for (const order of newOrder) {
       updates.push(
-        teams.members().pivotQuery().where('member_id', order.id).update({ order: order.order })
+        Database.table('member_team').where('member_id', order.id).update({ order: order.order })
       )
+
+      // updates.push(
+      //   teams.members().pivotQuery().where('member_id', order.id).update({ order: order.order })
+      // )
     }
 
     await Promise.all(updates)
