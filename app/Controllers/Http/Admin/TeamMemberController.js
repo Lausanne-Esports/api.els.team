@@ -35,6 +35,23 @@ class TeamMemberController {
     return response.noContent()
   }
 
+  async update ({ params, request, response }) {
+    const [team, member] = await Promise.all([
+      Team.findOrFail(params.id),
+      Member.findOrFail(params.memberId),
+    ])
+
+    await Database.table('member_team')
+      .where('member_id', member.id)
+      .where('team_id', team.id)
+      .update({
+        role: request.input('role'),
+        academy: request.input('academy'),
+      })
+
+    return response.noContent()
+  }
+
   async destroy ({ params, response }) {
     const [team, member] = await Promise.all([
       Team.findOrFail(params.id),
@@ -51,6 +68,7 @@ class TeamMemberController {
     const teams = await Team.query().with('members').where('id', params.id).first()
     const updates = []
 
+    //! TODO: Verify that we scope to the team
     for (const order of newOrder) {
       updates.push(
         Database.table('member_team').where('member_id', order.id).update({ order: order.order })

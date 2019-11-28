@@ -64,6 +64,7 @@ Route.group(() => {
   Route.post('teams/:id/up', 'TeamController.up')
   Route.post('teams/:id/down', 'TeamController.down')
   Route.post('teams/:id/members', 'TeamMemberController.store')
+  Route.put('teams/:id/members/:memberId', 'TeamMemberController.update')
   Route.delete('teams/:id/members/:memberId', 'TeamMemberController.destroy')
   Route.post('teams/:id/members/order', 'TeamMemberController.order')
 
