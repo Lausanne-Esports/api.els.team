@@ -65,13 +65,15 @@ class TeamMemberController {
 
   async order ({ params, request, response }) {
     const { order: newOrder } = request.only('order')
-    const teams = await Team.query().with('members').where('id', params.id).first()
+    // const teams = await Team.query().with('members').where('id', params.id).first()
     const updates = []
 
-    //! TODO: Verify that we scope to the team
     for (const order of newOrder) {
       updates.push(
-        Database.table('member_team').where('member_id', order.id).update({ order: order.order })
+        Database.table('member_team')
+          .where('member_id', order.id)
+          .where('team_id', params.id)
+          .update({ order: order.order })
       )
 
       // updates.push(
