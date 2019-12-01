@@ -30,6 +30,8 @@ Route.get('teams/:id', 'TeamController.show')
 Route.get('streams', 'StreamController.index')
 Route.get('streams/:id', 'StreamController.show')
 
+Route.get('awards', 'AwardController.index')
+
 Route.group(() => {
   Route.get('me', 'Admin/UserController.current')
   Route.delete('sessions', 'SessionController.destroy')
@@ -76,8 +78,10 @@ Route.group(() => {
   // TODO: add validator
   Route.put('articles/:id', 'ArticleController.update')
   Route.put('translations/:id', 'ArticleTranslationController.update')
-
   Route.delete('translations/:id', 'ArticleTranslationController.destroy')
   Route.get('translations/:id', 'ArticleTranslationController.show')
   Route.post('articles/:id/translations', 'ArticleTranslationController.store').validator('ArticleTranslationStore')
+
+  Route.post('awards', 'AwardController.store')
+  Route.post('awards/order', 'AwardController.order')
 }).middleware('auth').prefix('admin').namespace('Admin')
