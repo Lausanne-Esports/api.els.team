@@ -31,6 +31,7 @@ Route.get('streams', 'StreamController.index')
 Route.get('streams/:id', 'StreamController.show')
 
 Route.get('awards', 'AwardController.index')
+Route.get('awards/categories/order', 'AwardController.categoryOrder')
 
 Route.group(() => {
   Route.get('me', 'Admin/UserController.current')
@@ -84,4 +85,5 @@ Route.group(() => {
 
   Route.post('awards', 'AwardController.store')
   Route.post('awards/order', 'AwardController.order')
+  Route.post('awards/categories/order', 'AwardController.categoryOrder')
 }).middleware('auth').prefix('admin').namespace('Admin')
