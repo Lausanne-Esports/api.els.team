@@ -27,6 +27,9 @@ Route.get('teams', 'TeamController.index')
 Route.get('teams/categories', 'TeamCategoryController.index')
 Route.get('teams/:id', 'TeamController.show')
 
+Route.get('staff', 'StaffController.index')
+Route.get('staff/:id', 'StaffController.show')
+
 Route.get('streams', 'StreamController.index')
 Route.get('streams/:id', 'StreamController.show')
 
@@ -64,12 +67,23 @@ Route.group(() => {
   Route.post('teams', 'TeamController.store')
   Route.put('teams/:id', 'TeamController.update')
   Route.post('teams/order', 'TeamController.order')
-  Route.post('teams/:id/up', 'TeamController.up')
-  Route.post('teams/:id/down', 'TeamController.down')
   Route.post('teams/:id/members', 'TeamMemberController.store')
   Route.put('teams/:id/members/:memberId', 'TeamMemberController.update')
   Route.delete('teams/:id/members/:memberId', 'TeamMemberController.destroy')
   Route.post('teams/:id/members/order', 'TeamMemberController.order')
+
+  Route.get('staff', 'StaffController.index')
+  Route.get('staff/:id', 'StaffController.show')
+  Route.get('staff/:id/members', 'StaffMemberController.index')
+
+  // TODO: add validator
+  Route.post('staff', 'StaffController.store')
+  Route.put('staff/:id', 'StaffController.update')
+  Route.post('staff/order', 'StaffController.order')
+  Route.post('staff/:id/members', 'StaffMemberController.store')
+  Route.put('staff/:id/members/:memberId', 'StaffMemberController.update')
+  Route.delete('staff/:id/members/:memberId', 'StaffMemberController.destroy')
+  Route.post('staff/:id/members/order', 'StaffMemberController.order')
 
   Route.get('articles', 'ArticleController.index')
   Route.post('articles', 'ArticleController.store').validator('ArticleStore')
