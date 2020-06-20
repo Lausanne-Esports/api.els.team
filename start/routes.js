@@ -9,7 +9,7 @@
 
 const Route = use('Route')
 
-Route.get('/', () => ({ version: '20191219', uptime: process.uptime() }))
+Route.get('/', () => ({ version: '20200620', uptime: process.uptime() }))
 
 Route.post('contact', 'ContactController.store').validator('Contact')
 Route.post('sessions', 'SessionController.store').validator('SessionStore')
