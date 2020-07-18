@@ -24,7 +24,7 @@
     "argon2": "^0.21.0",
     "got": "^9.5.0",
     "indicative": "^5.0.8",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "pg": "^7.15.1",
     "rehype-minify-whitespace": "^2.0.4",
