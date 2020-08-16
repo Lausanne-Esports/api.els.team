@@ -24,7 +24,6 @@ export default class StaffSeeder extends BaseSeeder {
       await Staff.createMany(staffRecords)
       await Database.table('member_staff').multiInsert(pivotRecords)
     } catch (e) {
-      console.log(e)
       console.log(`Error! File ${staffFile} or ${pivotFile} does not exist.`)
     }
   }
