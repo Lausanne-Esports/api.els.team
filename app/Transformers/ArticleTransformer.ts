@@ -9,7 +9,7 @@ class ArticleTransformer {
     }
   }
 
-  private transform (article: Article) {
+  public transform (article: Article) {
     return {
       translations: article.translations.map(translation => this.getTranslation(translation)),
       id: article.id,

@@ -34,9 +34,9 @@ Route.get('articles/categories', 'ArticleCategoriesController.index')
 Route.get('articles/:id', 'ArticlesController.show')
 Route.get('articles', 'ArticlesController.index')
 
-// Route.get('teams', 'TeamController.index')
-// Route.get('teams/categories', 'TeamCategoryController.index')
-// Route.get('teams/:id', 'TeamController.show')
+Route.get('teams', 'TeamsController.index')
+Route.get('teams/categories', 'TeamCategoriesController.index')
+Route.get('teams/:id', 'TeamsController.show')
 
 // Route.get('staff', 'StaffController.index')
 // Route.get('staff/:id', 'StaffController.show')

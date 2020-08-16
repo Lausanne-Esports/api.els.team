@@ -31,18 +31,13 @@ export default class Team extends BaseModel {
   @belongsTo(() => TeamCategory, { foreignKey: 'categoryId' })
   public category: BelongsTo<typeof TeamCategory>
 
-  // members () {
-  //   return this.belongsToMany('App/Models/Member')
-  //     .withPivot(['role', 'order', 'academy']).pivotPrimaryKey(null)
-  //     .orderBy('order', 'asc')
-  // }
-
   @manyToMany(() => Member, {
     localKey: 'id',
     pivotForeignKey: 'team_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'member_id',
     pivotTable: 'member_team',
+    pivotColumns: ['role', 'order', 'academy'],
   })
   public members: ManyToMany<typeof Member>
 }

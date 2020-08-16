@@ -76,17 +76,13 @@ export default class Member extends BaseModel {
   //   return super.dates.concat(['birth_on'])
   // }
 
-  // teams () {
-  //   return this.belongsToMany('App/Models/Team')
-  //     .withPivot(['role', 'order', 'academy']).pivotPrimaryKey(null)
-  // }
-
   @manyToMany(() => Team, {
     localKey: 'id',
     pivotForeignKey: 'member_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'team_id',
     pivotTable: 'member_team',
+    pivotColumns: ['role', 'order', 'academy'],
   })
   public teams: ManyToMany<typeof Team>
 }
