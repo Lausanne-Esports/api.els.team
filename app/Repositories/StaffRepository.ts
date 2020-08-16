@@ -1,27 +1,25 @@
-import Team from 'App/Models/Team'
+import Staff from 'App/Models/Staff'
 
-class TeamRepository {
+class StaffRepository {
   public all () {
-    return Team
+    return Staff
       .query()
-      .preload('category')
       .preload('members')
       .where('activated', true)
       .orderBy('order', 'asc')
   }
 
   public get (id: number) {
-    return Team
+    return Staff
       .query()
       .where('id', id)
       .where('activated', true)
-      .preload('category')
       .preload('members', (query) => {
-        query.pivotColumns(['role', 'order', 'academy'])
+        query.pivotColumns(['role', 'order'])
         query.orderBy('order', 'asc')
       })
       .firstOrFail()
   }
 }
 
-export default new TeamRepository()
+export default new StaffRepository()

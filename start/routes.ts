@@ -38,8 +38,8 @@ Route.get('teams', 'TeamsController.index')
 Route.get('teams/categories', 'TeamCategoriesController.index')
 Route.get('teams/:id', 'TeamsController.show')
 
-// Route.get('staff', 'StaffController.index')
-// Route.get('staff/:id', 'StaffController.show')
+Route.get('staff', 'StaffController.index')
+Route.get('staff/:id', 'StaffController.show')
 
 // Route.get('streams', 'StreamController.index')
 // Route.get('streams/:id', 'StreamController.show')
