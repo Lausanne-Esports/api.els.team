@@ -1,18 +1,18 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import { promises } from 'fs'
 import parse from 'csv-parse/lib/sync'
-import Article from 'App/Models/Article'
+import Team from 'App/Models/Team'
 
-export default class ArticleCategorySeeder extends BaseSeeder {
+export default class TeamSeeder extends BaseSeeder {
   public async run () {
-    const file = 'tmp/articles.csv'
+    const file = 'tmp/teams.csv'
     try {
-      const articles = await promises.readFile(file)
-      const records = parse(articles, {
+      const teams = await promises.readFile(file)
+      const records = parse(teams, {
         columns: true,
         skip_empty_lines: true,
       })
-      await Article.createMany(records)
+      await Team.createMany(records)
     } catch (e) {
       console.log(`Error! File ${file} does not exist.`)
     }

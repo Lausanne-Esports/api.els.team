@@ -7,8 +7,8 @@ export default class ArticleCategorySeeder extends BaseSeeder {
   public async run () {
     const file = 'tmp/article_categories.csv'
     try {
-      const users = await promises.readFile(file)
-      const records = parse(users, {
+      const articleCategories = await promises.readFile(file)
+      const records = parse(articleCategories, {
         columns: true,
         skip_empty_lines: true,
       })

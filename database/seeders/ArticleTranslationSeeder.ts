@@ -7,14 +7,13 @@ export default class ArticleTranslationSeeder extends BaseSeeder {
   public async run () {
     const file = 'tmp/article_translations.csv'
     try {
-      const users = await promises.readFile(file)
-      const records = parse(users, {
+      const articleTranslations = await promises.readFile(file)
+      const records = parse(articleTranslations, {
         columns: true,
         skip_empty_lines: true,
       })
       await ArticleTranslation.createMany(records)
     } catch (e) {
-      console.log(e)
       console.log(`Error! File ${file} does not exist.`)
     }
   }
