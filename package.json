@@ -24,6 +24,7 @@
     "@adonisjs/core": "^5.0.0-preview-rc-1.11",
     "@adonisjs/fold": "^6.4.0",
     "@adonisjs/lucid": "^8.4.1",
+    "got": "^11.5.2",
     "luxon": "^1.24.1",
     "pg": "^8.3.0",
     "proxy-addr": "^2.0.6",

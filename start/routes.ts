@@ -20,7 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => ({ version: '20200816', uptime: process.uptime() }))
+Route.get('/', async () => ({ version: '20200817', uptime: process.uptime() }))
 
 // Route.post('contact', 'ContactController.store')
 // Route.post('sessions', 'SessionController.store')
@@ -41,8 +41,8 @@ Route.get('teams/:id', 'TeamsController.show')
 Route.get('staff', 'StaffController.index')
 Route.get('staff/:id', 'StaffController.show')
 
-// Route.get('streams', 'StreamController.index')
-// Route.get('streams/:id', 'StreamController.show')
+Route.get('streams', 'StreamsController.index')
+Route.get('streams/:id', 'StreamsController.show')
 
 Route.get('awards', 'AwardsController.index')
 Route.get('awards/categories/order', 'AwardsController.categoryOrder')
