@@ -41,9 +41,9 @@ export default class ArticleTranslation extends BaseModel {
   @belongsTo(() => Article)
   public article: BelongsTo<typeof Article>
 
-  @belongsTo(() => Language)
+  @belongsTo(() => Language, { foreignKey: 'languageId' })
   public language: BelongsTo<typeof Language>
 
-  @belongsTo(() => ArticleState)
+  @belongsTo(() => ArticleState, { foreignKey: 'stateId' })
   public state: BelongsTo<typeof ArticleState>
 }

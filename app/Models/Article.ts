@@ -35,13 +35,13 @@ export default class Article extends BaseModel {
   @belongsTo(() => ArticleCategory, { foreignKey: 'categoryId' })
   public category: BelongsTo<typeof ArticleCategory>
 
-  @belongsTo(() => ArticleTemplate)
+  @belongsTo(() => ArticleTemplate, { foreignKey: 'templateId' })
   public template: BelongsTo<typeof ArticleTemplate>
 
   @hasMany(() => ArticleTranslation)
   public translations: HasMany<typeof ArticleTranslation>
 
   public static published = scope((query) => {
-    query.where('publishedAt', '<', DateTime.utc().toSQLDate() as string)
+    query.where('published_at', '<', DateTime.utc().toSQLDate() as string)
   })
 }

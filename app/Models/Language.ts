@@ -11,6 +11,6 @@ export default class Language extends BaseModel {
   @column()
   public code: string
 
-  @hasMany(() => ArticleTranslation)
+  @hasMany(() => ArticleTranslation, { foreignKey: 'languageId' })
   public translations: HasMany<typeof ArticleTranslation>
 }
