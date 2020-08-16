@@ -30,7 +30,6 @@ export default class MemberSeeder extends BaseSeeder {
       await Member.createMany(membersRecords)
       await Database.table('member_team').multiInsert(pivotRecords)
     } catch (e) {
-      console.log(e)
       console.log(`Error! File ${membersFile} or ${pivotFile} does not exist.`)
     }
   }

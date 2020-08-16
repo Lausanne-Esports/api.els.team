@@ -1,8 +1,6 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class Teams extends BaseSchema {
-  protected tableName = 'teams'
-
   public async up () {
     this.schema.createTable('teams', (table) => {
       table.increments('id')
