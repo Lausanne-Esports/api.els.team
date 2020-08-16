@@ -44,8 +44,8 @@ Route.get('staff/:id', 'StaffController.show')
 // Route.get('streams', 'StreamController.index')
 // Route.get('streams/:id', 'StreamController.show')
 
-// Route.get('awards', 'AwardController.index')
-// Route.get('awards/categories/order', 'AwardController.categoryOrder')
+Route.get('awards', 'AwardsController.index')
+Route.get('awards/categories/order', 'AwardsController.categoryOrder')
 
 // Route.group(() => {
 //   Route.get('me', 'Admin/UserController.current')
