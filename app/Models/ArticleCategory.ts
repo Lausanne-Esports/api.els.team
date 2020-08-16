@@ -1,4 +1,5 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Article from './Article'
 
 export default class ArticleCategory extends BaseModel {
   @column({ isPrimary: true })
@@ -9,4 +10,7 @@ export default class ArticleCategory extends BaseModel {
 
   @column()
   public code: string
+
+  @hasMany(() => Article, { foreignKey: 'categoryId' })
+  public translations: HasMany<typeof Article>
 }

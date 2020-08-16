@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Language from './Language'
+import Article from './Article'
+import ArticleState from './ArticleState'
 
 export default class ArticleTranslation extends BaseModel {
   @column({ isPrimary: true })
@@ -28,8 +30,20 @@ export default class ArticleTranslation extends BaseModel {
   public viewCount: number
 
   @column()
+  public articleId: number
+
+  @column()
   public languageId: number
+
+  @column()
+  public stateId: number
+
+  @belongsTo(() => Article)
+  public article: BelongsTo<typeof Article>
 
   @belongsTo(() => Language)
   public language: BelongsTo<typeof Language>
+
+  @belongsTo(() => ArticleState)
+  public state: BelongsTo<typeof ArticleState>
 }

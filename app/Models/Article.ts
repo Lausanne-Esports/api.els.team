@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, BelongsTo, belongsTo, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, BelongsTo, belongsTo, hasMany, HasMany, scope } from '@ioc:Adonis/Lucid/Orm'
 import ArticleCategory from './ArticleCategory'
 import ArticleTranslation from './ArticleTranslation'
 import ArticleTemplate from './ArticleTemplate'
@@ -32,7 +32,7 @@ export default class Article extends BaseModel {
   @column()
   public templateId: number
 
-  @belongsTo(() => ArticleCategory)
+  @belongsTo(() => ArticleCategory, { foreignKey: 'categoryId' })
   public category: BelongsTo<typeof ArticleCategory>
 
   @belongsTo(() => ArticleTemplate)
@@ -40,4 +40,8 @@ export default class Article extends BaseModel {
 
   @hasMany(() => ArticleTranslation)
   public translations: HasMany<typeof ArticleTranslation>
+
+  public static published = scope((query) => {
+    query.where('publishedAt', '<', DateTime.utc().toSQLDate() as string)
+  })
 }
