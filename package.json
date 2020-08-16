@@ -11,6 +11,7 @@
   "devDependencies": {
     "@adonisjs/assembler": "^2.1.5",
     "adonis-preset-ts": "^1.0.4",
+    "csv": "^5.3.2",
     "eslint": "^7.7.0",
     "eslint-plugin-adonis": "^1.0.14",
     "pino-pretty": "^4.1.0",
@@ -22,6 +23,9 @@
     "@adonisjs/ace": "^6.9.4",
     "@adonisjs/core": "^5.0.0-preview-rc-1.11",
     "@adonisjs/fold": "^6.4.0",
+    "@adonisjs/lucid": "^8.4.1",
+    "luxon": "^1.24.1",
+    "pg": "^8.3.0",
     "proxy-addr": "^2.0.6",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.19"
