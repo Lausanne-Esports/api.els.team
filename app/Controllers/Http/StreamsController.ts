@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Killian Tornese & Valentin Kaelin
+ */
+
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Stream from 'App/Models/Stream'
 import Twitch from 'App/Helpers/Twitch'

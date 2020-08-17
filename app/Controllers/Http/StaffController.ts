@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - alentin Kaelin
+ */
+
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import StaffRepository from 'App/Repositories/StaffRepository'

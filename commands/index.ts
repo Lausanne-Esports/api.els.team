@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ */
+
 import { listDirectoryFiles } from '@adonisjs/ace'
 import Application from '@ioc:Adonis/Core/Application'
 

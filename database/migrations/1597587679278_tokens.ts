@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ */
+
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class Tokens extends BaseSchema {

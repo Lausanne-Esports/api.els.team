@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Valentin Kaelin
+ */
+
 import Staff from 'App/Models/Staff'
 
 class StaffRepository {

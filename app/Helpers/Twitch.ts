@@ -2,8 +2,12 @@
  * Lausanne-Sport eSports API Source Code.
  *
  * @license GPLv3
- * @copyright Lausanne-Sport eSports - Killian Tornese
+ * @copyright Lausanne-Sport eSports - Killian Tornese & Valentin Kaelin
  */
+
+import got from 'got'
+import Env from '@ioc:Adonis/Core/Env'
+import Cache from 'App/Helpers/Cache'
 
 export interface Streamers {
   users: TwitchUser[];
@@ -32,10 +36,6 @@ export interface Channel {
 export interface Preview {
   large: string;
 }
-
-import got from 'got'
-import Env from '@ioc:Adonis/Core/Env'
-import Cache from 'App/Helpers/Cache'
 
 const defaultOptions: Object = {
   headers: {

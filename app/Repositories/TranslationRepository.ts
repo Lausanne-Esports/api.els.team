@@ -1,7 +1,14 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ */
+
 import ArticleTranslation from 'App/Models/ArticleTranslation'
 
 class TranslationRepository {
-  public async get (articleId, langId, {isAuthenticated = false}) {
+  public async get (articleId: number, langId: number, {isAuthenticated = false}) {
     const query = ArticleTranslation.query()
       .where('language_id', langId)
       .where('article_id', articleId)

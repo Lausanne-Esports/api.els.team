@@ -1,4 +1,9 @@
 /**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ * 
  * Config source: https://git.io/JfefC
  *
  * Feel free to let us know via PR, if you find something broken in this config

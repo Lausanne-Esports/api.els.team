@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ */
+
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import { promises } from 'fs'
 import parse from 'csv-parse/lib/sync'

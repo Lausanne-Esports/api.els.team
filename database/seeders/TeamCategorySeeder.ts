@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ */
+
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import TeamCategory from 'App/Models/TeamCategory'
 

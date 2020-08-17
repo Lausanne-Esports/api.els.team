@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Killian Tornese & Valentin Kaelin
+ */
+
 const Cache = new Map()
 
 export default {

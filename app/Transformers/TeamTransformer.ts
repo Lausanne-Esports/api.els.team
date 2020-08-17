@@ -1,3 +1,10 @@
+/**
+ * Lausanne-Sport eSports API Source Code.
+ *
+ * @license GPLv3
+ * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
+ */
+
 import Team from 'App/Models/Team'
 import MemberTransformer from './MemberTransformer'
 import { MemberTransformed } from './MemberTransformer'
