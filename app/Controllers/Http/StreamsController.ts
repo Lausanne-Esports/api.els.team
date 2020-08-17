@@ -8,8 +8,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Stream from 'App/Models/Stream'
 import Twitch from 'App/Helpers/Twitch'
-import StreamTransformer from 'App/Transformers/StreamTransformer'
-import { SerializedStream } from 'App/Transformers/StreamTransformer'
+import StreamTransformer, { SerializedStream } from 'App/Transformers/StreamTransformer'
 
 export default class StreamsController {
   public async index ({ response }: HttpContextContract) {
