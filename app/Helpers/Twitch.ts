@@ -19,7 +19,7 @@ export interface TwitchUser {
   name: string;
 }
 
-export interface StreamTwitch {
+export interface TwitchStream {
   channel: Channel;
   game: string;
   preview: Preview;
@@ -54,12 +54,12 @@ class Twitch {
 
   public async getStreams (channels: string[]) {
     try {
-      const { streams }: { streams: StreamTwitch[] } = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${channels.join()}&limit=100`, defaultOptions)
+      const { streams }: { streams: TwitchStream[] } = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${channels.join()}&limit=100`, defaultOptions)
 
-      return streams.reduce((streams: StreamTwitch[], stream: StreamTwitch) => {
+      return streams.reduce((streams: TwitchStream[], stream: TwitchStream) => {
         streams[stream.channel.name] = stream
         return streams
-      }, [] as StreamTwitch[])
+      }, [] as TwitchStream[])
     } catch (e) {
       return []
     }

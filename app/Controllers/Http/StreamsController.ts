@@ -8,45 +8,23 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Stream from 'App/Models/Stream'
 import Twitch from 'App/Helpers/Twitch'
-import { StreamTwitch } from 'App/Helpers/Twitch'
+import StreamTransformer from 'App/Transformers/StreamTransformer'
+import { SerializedStream } from 'App/Transformers/StreamTransformer'
 
 export default class StreamsController {
-  private mergeTwitchData (channels: any[], streams: StreamTwitch[]) {
-    channels.forEach((channel) => {
-      if (streams && streams[channel.username] !== undefined) {
-        const stream = streams[channel.username]
+  public async index ({ response }: HttpContextContract) {
+    const streams = await Stream.query().orderBy('username')
+    const twitchStreams = await Twitch.getStreams(streams.map(x => x.username))
+    const serializedStreams = streams.map(channel => channel.toJSON()) as SerializedStream[]
 
-        channel.is_live = true
-        channel.is_partner = stream.channel.partner
-        channel.logo = stream.channel.logo
-        channel.viewers = stream.viewers
-        channel.status = stream.channel.status
-        channel.game = stream.game
-        channel.preview = stream.preview.large
-      } else {
-        channel.is_live = false
-        channel.is_partner = false
-        channel.logo = ''
-        channel.status = ''
-        channel.viewers = 0
-        channel.game = ''
-        channel.preview = ''
-      }
-    })
-    return channels
+    return response.json(StreamTransformer.transformCollection(serializedStreams, twitchStreams))
   }
 
-  public async index ({}: HttpContextContract) {
-    const channels = await Stream.query().orderBy('username')
-    const streams = await Twitch.getStreams(channels.map(x => x.username))
+  public async show ({ params, response }: HttpContextContract) {
+    const stream = await Stream.findOrFail(params.id)
+    const twitchStream = await Twitch.getStreams([stream.username])
+    const serializedStream = stream.toJSON() as SerializedStream
 
-    return this.mergeTwitchData(channels.map(channel => channel.toJSON()), streams)
-  }
-
-  public async show ({ params }: HttpContextContract) {
-    const channel = await Stream.findOrFail(params.id)
-    const stream = await Twitch.getStreams([channel.username])
-
-    return this.mergeTwitchData([channel.toJSON()], stream)[0]
+    return response.json(StreamTransformer.transform(serializedStream, twitchStream))
   }
 }
