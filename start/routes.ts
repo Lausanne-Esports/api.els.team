@@ -10,7 +10,7 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => ({ version: '20200817', uptime: process.uptime() }))
 
 // Route.post('contact', 'ContactController.store')
-// Route.post('sessions', 'SessionController.store')
+Route.post('sessions', 'SessionsController.store')
 // Route.post('users/validate', 'Admin/UserController.validate')
 // Route.post('password-requests', 'PasswordRequestController.store')
 // Route.post('password-requests/:token', 'PasswordRequestController.update')
@@ -34,10 +34,10 @@ Route.get('streams/:id', 'StreamsController.show')
 Route.get('awards', 'AwardsController.index')
 Route.get('awards/categories/order', 'AwardsController.categoryOrder')
 
-// Route.group(() => {
-//   Route.get('me', 'Admin/UserController.current')
-//   Route.delete('sessions', 'SessionController.destroy')
-// }).middleware('auth')
+Route.group(() => {
+  Route.get('me', 'Admin/UsersController.current')
+  Route.delete('sessions', 'SessionsController.destroy')
+}).middleware('auth')
 
 // Route.group(() => {
 //   Route.get('users', 'UserController.index')

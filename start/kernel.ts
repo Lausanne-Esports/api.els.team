@@ -48,4 +48,5 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
+  auth: 'App/Middleware/Auth',
 })

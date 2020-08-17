@@ -39,7 +39,7 @@ const sessionConfig: SessionConfig = {
   | The name of the cookie that will hold the session id.
   |
   */
-  cookieName: 'els-session',
+  cookieName: 'els-session-v5',
 
   /*
   |--------------------------------------------------------------------------
@@ -80,7 +80,8 @@ const sessionConfig: SessionConfig = {
   cookie: {
     path: '/',
     httpOnly: true,
-    sameSite: false,
+    domain: Env.get('COOKIE_DOMAIN', 'els.team') as string,
+    sameSite: true,
   },
 
   /*
