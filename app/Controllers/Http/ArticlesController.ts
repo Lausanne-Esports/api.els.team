@@ -13,10 +13,10 @@ import TranslationRepository from 'App/Repositories/TranslationRepository'
 import ArticleItemTransformer from 'App/Transformers/ArticleItemTransformer'
 
 export default class ArticlesController {
-  public async index ({ request, response }: HttpContextContract) {
-    // TODO: change this when the auth package has been added
-    // const isAuthenticated = await auth.check().catch(() => { })
-    const isAuthenticated = false
+  public async index ({ auth, request, response }: HttpContextContract) {
+    const isAuthenticated = await auth.check().catch(() => {
+      return false
+    })
 
     const articles = await ArticleRepository.getAll({
       isAuthenticated,
@@ -26,10 +26,10 @@ export default class ArticlesController {
     return response.json(ArticleTransformer.transformCollection(articles))
   }
 
-  public async show ({ params, request, response }) {
-    // TODO: change this when the auth package has been added
-    // const isAuthenticated = await auth.check().catch(() => { })
-    const isAuthenticated = false
+  public async show ({ auth, params, request, response }) {
+    const isAuthenticated = await auth.check().catch(() => {
+      return false
+    })
 
     const [language, article] = await Promise.all([
       Language.findByOrFail('code', request.input('lang', 'fr')),
