@@ -11,7 +11,7 @@ Route.get('/', async () => ({ version: '20200817', uptime: process.uptime() }))
 
 // Route.post('contact', 'ContactController.store')
 Route.post('sessions', 'SessionsController.store')
-// Route.post('users/validate', 'Admin/UserController.validate')
+Route.get('users/validate/:email', 'Admin/UsersController.validate').as('verifyEmail')
 // Route.post('password-requests', 'PasswordRequestController.store')
 // Route.post('password-requests/:token', 'PasswordRequestController.update')
 

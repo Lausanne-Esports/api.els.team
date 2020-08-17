@@ -33,13 +33,18 @@ export default class UsersController {
     })
   }
 
-  // public async validate ({ request, response }) {
-  //   const token = Encryption.base64Decode(request.input('token'))
-  //   await Persona.verifyEmail(token)
+  public async validate ({ params, request, response }: HttpContextContract) {
+    if (!request.hasValidSignature()) {
+      return response.badRequest('Validation failed')
+    }
 
-  //   return response.ok({
-  //     status: 200,
-  //     message: 'Account validated successfully',
-  //   })
-  // }
+    const user = await User.findByOrFail('email', params.email)
+    user.accountStatus = 'active'
+    await user.save()
+
+    return response.ok({
+      status: 200,
+      message: 'Account validated successfully',
+    })
+  }
 }

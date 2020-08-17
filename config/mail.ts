@@ -23,7 +23,7 @@ const mailConfig: MailConfig = {
   | a mailer
   |
   */
-  mailer: 'smtp',
+  mailer: 'mailgun',
 
   /*
   |--------------------------------------------------------------------------
@@ -88,6 +88,7 @@ const mailConfig: MailConfig = {
     mailgun: {
       driver: 'mailgun',
       baseUrl: 'https://api.mailgun.net/v3',
+      domain: Env.get('MAILGUN_DOMAIN') as string,
       key: Env.get('MAILGUN_API_KEY') as string,
     },
 

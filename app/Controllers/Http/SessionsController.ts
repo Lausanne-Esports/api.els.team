@@ -16,7 +16,6 @@ export default class SessionsController {
     try {
       await auth.attempt(uid, password)
     } catch (e) {
-      console.log(e)
       throw new InvalidCredentialException(
         'Authentication failed. Either supplied credentials are invalid or the account is inactive',
         401,
