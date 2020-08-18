@@ -49,12 +49,12 @@ Route.group(() => {
   Route.post('members', 'MembersController.store')
   Route.put('members/:id', 'MembersController.update')
 
-  //   Route.get('streams', 'StreamController.index')
-  //   Route.get('streams/:id', 'StreamController.show')
+  Route.get('streams', 'StreamsController.index')
+  Route.get('streams/:id', 'StreamsController.show')
 
-  //   Route.post('streams', 'StreamController.store')
-  //   Route.put('streams/:id', 'StreamController.update')
-  //   Route.delete('streams/:id', 'StreamController.destroy')
+  Route.post('streams', 'StreamsController.store')
+  Route.put('streams/:id', 'StreamsController.update')
+  Route.delete('streams/:id', 'StreamsController.destroy')
 
   //   Route.get('teams', 'TeamController.index')
   //   Route.get('teams/:id', 'TeamController.show')

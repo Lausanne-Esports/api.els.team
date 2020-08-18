@@ -47,9 +47,9 @@ const defaultOptions: Object = {
 
 class Twitch {
   public async getChannel (channel: string) {
-    const { body }: { body: Streamers } = await got.get(`https://api.twitch.tv/kraken/users?login=${channel}`, defaultOptions).json()
+    const data: Streamers = await got.get(`https://api.twitch.tv/kraken/users?login=${channel}`, defaultOptions).json()
 
-    return body.users[0]
+    return data.users[0]
   }
 
   public async getStreams (channels: string[]) {
