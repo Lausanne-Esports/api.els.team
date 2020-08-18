@@ -8,7 +8,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema } from '@ioc:Adonis/Core/Validator'
 
-export default class TeamOrderValidator {
+export default class TeamMemberUpdateValidator {
   constructor (private ctx: HttpContextContract) {
   }
 
@@ -32,12 +32,8 @@ export default class TeamOrderValidator {
    *    ```
    */
   public schema = schema.create({
-    order: schema.array().members(
-      schema.object().members({
-        id: schema.number(),
-        order: schema.number(),
-      })
-    ),
+    role: schema.string(),
+    academy: schema.boolean.optional(),
   })
 
   /**

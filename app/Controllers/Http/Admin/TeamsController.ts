@@ -9,7 +9,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Team from 'App/Models/Team'
 import TeamValidator from 'App/Validators/TeamValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
-import TeamOrderValidator from 'App/Validators/TeamOrderValidator'
+import OrderUpdateValidator from 'App/Validators/OrderUpdateValidator'
 
 export default class TeamsController {
   public async index ({ response }: HttpContextContract) {
@@ -46,11 +46,11 @@ export default class TeamsController {
     return response.noContent()
   }
 
-  public async order ({ request, response }) {
-    const { order: newOrder} = await request.validate(TeamOrderValidator)
+  public async order ({ request, response }: HttpContextContract) {
+    const { order: newOrder } = await request.validate(OrderUpdateValidator)
 
     const teams = await Team.all()
-    const updates:Promise<Team>[] = []
+    const updates: Promise<Team>[] = []
 
     for (const order of newOrder) {
       const team = teams.find(team => team.id === order.id)

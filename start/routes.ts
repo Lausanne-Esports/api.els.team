@@ -50,12 +50,8 @@ Route.group(() => {
   Route.resource('teams', 'TeamsController').apiOnly().except(['destroy'])
   Route.post('teams/order', 'TeamsController.order')
 
-  Route.get('teams/:id/members', 'TeamMembersController.index')
-
-  //   Route.post('teams/:id/members', 'TeamMemberController.store')
-  //   Route.put('teams/:id/members/:memberId', 'TeamMemberController.update')
-  //   Route.delete('teams/:id/members/:memberId', 'TeamMemberController.destroy')
-  //   Route.post('teams/:id/members/order', 'TeamMemberController.order')
+  Route.resource('teams.members', 'TeamMembersController').except(['show'])
+  Route.post('teams/:team_id/members/order', 'TeamMembersController.order')
 
   //   Route.get('staff', 'StaffController.index')
   //   Route.get('staff/:id', 'StaffController.show')
