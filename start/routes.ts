@@ -53,18 +53,15 @@ Route.group(() => {
   Route.resource('teams.members', 'TeamMembersController').except(['show'])
   Route.post('teams/:team_id/members/order', 'TeamMembersController.order')
 
-  //   Route.get('staff', 'StaffController.index')
-  //   Route.get('staff/:id', 'StaffController.show')
-  //   Route.get('staff/:id/members', 'StaffMemberController.index')
+  Route.resource('staff', 'StaffController').apiOnly().except(['destroy'])
+  Route.post('staff/order', 'StaffController.order')
 
-  //   // TODO: add validator
-  //   Route.post('staff', 'StaffController.store')
-  //   Route.put('staff/:id', 'StaffController.update')
-  //   Route.post('staff/order', 'StaffController.order')
+  //   Route.get('staff/:id/members', 'StaffMemberController.index')
   //   Route.post('staff/:id/members', 'StaffMemberController.store')
   //   Route.put('staff/:id/members/:memberId', 'StaffMemberController.update')
   //   Route.delete('staff/:id/members/:memberId', 'StaffMemberController.destroy')
-  //   Route.post('staff/:id/members/order', 'StaffMemberController.order')
+  Route.resource('staff.members', 'StaffMembersController').except(['show'])
+  Route.post('staff/:staff_id/members/order', 'StaffMemberController.order')
 
   //   Route.get('articles', 'ArticleController.index')
   //   Route.post('articles', 'ArticleController.store')
