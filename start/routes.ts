@@ -7,9 +7,9 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => ({ version: '20200817', uptime: process.uptime() }))
+Route.get('/', async () => ({ version: '20200819', uptime: process.uptime() }))
 
-// Route.post('contact', 'ContactController.store')
+Route.post('contact', 'ContactController.store')
 Route.post('sessions', 'SessionsController.store')
 Route.get('users/validate/:email', 'Admin/UsersController.validate').as('verifyEmail')
 // Route.post('password-requests', 'PasswordRequestController.store')
