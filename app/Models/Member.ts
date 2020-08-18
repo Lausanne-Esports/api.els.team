@@ -6,7 +6,7 @@
  */
 
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, manyToMany, ManyToMany, computed } from '@ioc:Adonis/Lucid/Orm'
 import Team from './Team'
 
 export default class Member extends BaseModel {
@@ -79,10 +79,6 @@ export default class Member extends BaseModel {
   @column()
   public youtube: string
 
-  // static get dates () {
-  //   return super.dates.concat(['birth_on'])
-  // }
-
   @manyToMany(() => Team, {
     localKey: 'id',
     pivotForeignKey: 'member_id',
@@ -92,4 +88,19 @@ export default class Member extends BaseModel {
     pivotColumns: ['role', 'order', 'academy'],
   })
   public teams: ManyToMany<typeof Team>
+
+  @computed()
+  public get pivot_role () {
+    return this.$extras.pivot_role
+  }
+
+  @computed()
+  public get pivot_order () {
+    return this.$extras.pivot_order
+  }
+
+  @computed()
+  public get pivot_academy () {
+    return this.$extras.pivot_academy
+  }
 }

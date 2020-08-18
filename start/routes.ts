@@ -47,14 +47,11 @@ Route.group(() => {
 
   Route.resource('streams', 'StreamsController').apiOnly()
 
-  //   Route.get('teams', 'TeamController.index')
-  //   Route.get('teams/:id', 'TeamController.show')
-  //   Route.get('teams/:id/members', 'TeamMemberController.index')
+  Route.resource('teams', 'TeamsController').apiOnly().except(['destroy'])
+  Route.post('teams/order', 'TeamsController.order')
 
-  //   // TODO: add validator
-  //   Route.post('teams', 'TeamController.store')
-  //   Route.put('teams/:id', 'TeamController.update')
-  //   Route.post('teams/order', 'TeamController.order')
+  Route.get('teams/:id/members', 'TeamMembersController.index')
+
   //   Route.post('teams/:id/members', 'TeamMemberController.store')
   //   Route.put('teams/:id/members/:memberId', 'TeamMemberController.update')
   //   Route.delete('teams/:id/members/:memberId', 'TeamMemberController.destroy')
