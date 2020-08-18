@@ -10,6 +10,7 @@ import { promises } from 'fs'
 import parse from 'csv-parse/lib/sync'
 import Member from 'App/Models/Member'
 import Database from '@ioc:Adonis/Lucid/Database'
+import { DateTime } from 'luxon'
 
 export default class MemberSeeder extends BaseSeeder {
   public async run () {
@@ -23,10 +24,10 @@ export default class MemberSeeder extends BaseSeeder {
         columns: true,
         skip_empty_lines: true,
       })
-        .map((member: Member) => {
+        .map((member: any) => {
           return {
             ...member,
-            'birth_on': member.birth_on ? new Date(member.birth_on) : null,
+            'birth_on': member.birth_on ? DateTime.fromISO(member.birth_on) : null,
           }
         })
       const pivotRecords = parse(pivotTables, {
