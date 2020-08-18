@@ -43,18 +43,9 @@ Route.group(() => {
   Route.get('users', 'UsersController.index')
   Route.post('users', 'UsersController.store')
 
-  Route.get('members', 'MembersController.index')
-  Route.get('members/:id', 'MembersController.show')
+  Route.resource('members', 'MembersController').apiOnly().except(['destroy'])
 
-  Route.post('members', 'MembersController.store')
-  Route.put('members/:id', 'MembersController.update')
-
-  Route.get('streams', 'StreamsController.index')
-  Route.get('streams/:id', 'StreamsController.show')
-
-  Route.post('streams', 'StreamsController.store')
-  Route.put('streams/:id', 'StreamsController.update')
-  Route.delete('streams/:id', 'StreamsController.destroy')
+  Route.resource('streams', 'StreamsController').apiOnly()
 
   //   Route.get('teams', 'TeamController.index')
   //   Route.get('teams/:id', 'TeamController.show')
