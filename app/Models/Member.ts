@@ -28,8 +28,8 @@ export default class Member extends BaseModel {
   @column()
   public firstname: string
 
-  @column()
-  public birth_on: Date
+  @column.date()
+  public birth_on: DateTime
 
   @column()
   public picture: string

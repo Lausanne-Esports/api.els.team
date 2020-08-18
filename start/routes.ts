@@ -43,12 +43,11 @@ Route.group(() => {
   Route.get('users', 'UsersController.index')
   Route.post('users', 'UsersController.store')
 
-  //   Route.get('members', 'MemberController.index')
-  //   Route.get('members/:id', 'MemberController.show')
+  Route.get('members', 'MembersController.index')
+  Route.get('members/:id', 'MembersController.show')
 
-  //   // TODO: add validator
-  //   Route.post('members', 'MemberController.store')
-  //   Route.put('members/:id', 'MemberController.update')
+  Route.post('members', 'MembersController.store')
+  Route.put('members/:id', 'MembersController.update')
 
   //   Route.get('streams', 'StreamController.index')
   //   Route.get('streams/:id', 'StreamController.show')
