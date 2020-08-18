@@ -71,7 +71,7 @@ Route.group(() => {
   //   Route.get('translations/:id', 'ArticleTranslationController.show')
   //   Route.post('articles/:id/translations', 'ArticleTranslationController.store')
 
-  //   Route.post('awards', 'AwardController.store')
-  //   Route.post('awards/order', 'AwardController.order')
-  //   Route.post('awards/categories/order', 'AwardController.categoryOrder')
+  Route.post('awards', 'AwardsController.store')
+  Route.post('awards/order', 'AwardsController.order')
+  Route.post('awards/categories/order', 'AwardsController.categoryOrder')
 }).middleware('auth').prefix('admin').namespace('App/Controllers/Http/Admin')
