@@ -56,12 +56,8 @@ Route.group(() => {
   Route.resource('staff', 'StaffController').apiOnly().except(['destroy'])
   Route.post('staff/order', 'StaffController.order')
 
-  //   Route.get('staff/:id/members', 'StaffMemberController.index')
-  //   Route.post('staff/:id/members', 'StaffMemberController.store')
-  //   Route.put('staff/:id/members/:memberId', 'StaffMemberController.update')
-  //   Route.delete('staff/:id/members/:memberId', 'StaffMemberController.destroy')
   Route.resource('staff.members', 'StaffMembersController').except(['show'])
-  Route.post('staff/:staff_id/members/order', 'StaffMemberController.order')
+  Route.post('staff/:staff_id/members/order', 'StaffMembersController.order')
 
   //   Route.get('articles', 'ArticleController.index')
   //   Route.post('articles', 'ArticleController.store')

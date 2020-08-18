@@ -30,7 +30,7 @@ export default class TeamMembersController {
       Member.findOrFail(memberId),
     ])
 
-    const { max } = await Database.query().where('team_id', team.id).max('order as max').from('member_team').first()
+    const { max } = await Database.from('member_team').where('team_id', team.id).max('order as max').first()
 
     await team.related('members').attach({
       [member.id]: {
