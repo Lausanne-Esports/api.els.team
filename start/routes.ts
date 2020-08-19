@@ -50,26 +50,20 @@ Route.group(() => {
   Route.resource('teams', 'TeamsController').apiOnly().except(['destroy'])
   Route.post('teams/order', 'TeamsController.order')
 
-  Route.resource('teams.members', 'TeamMembersController').except(['show'])
+  Route.resource('teams.members', 'TeamMembersController').apiOnly().except(['show'])
   Route.post('teams/:team_id/members/order', 'TeamMembersController.order')
 
   Route.resource('staff', 'StaffController').apiOnly().except(['destroy'])
   Route.post('staff/order', 'StaffController.order')
 
-  Route.resource('staff.members', 'StaffMembersController').except(['show'])
+  Route.resource('staff.members', 'StaffMembersController').apiOnly().except(['show'])
   Route.post('staff/:staff_id/members/order', 'StaffMembersController.order')
 
-  //   Route.get('articles', 'ArticleController.index')
-  //   Route.post('articles', 'ArticleController.store')
-  //   Route.get('articles/:id', 'ArticleController.show')
-  //   Route.post('articles/:id/featured', 'ArticleController.featured')
+  Route.resource('articles', 'ArticlesController').apiOnly().except(['destroy'])
+  Route.post('articles/:id/featured', 'ArticlesController.featured')
 
-  //   // TODO: add validator
-  //   Route.put('articles/:id', 'ArticleController.update')
-  //   Route.put('translations/:id', 'ArticleTranslationController.update')
-  //   Route.delete('translations/:id', 'ArticleTranslationController.destroy')
-  //   Route.get('translations/:id', 'ArticleTranslationController.show')
-  //   Route.post('articles/:id/translations', 'ArticleTranslationController.store')
+  Route.resource('translations', 'ArticleTranslationsController').apiOnly().except(['index', 'store'])
+  Route.post('articles/:id/translations', 'ArticleTranslationsController.store')
 
   Route.post('awards', 'AwardsController.store')
   Route.post('awards/order', 'AwardsController.order')
