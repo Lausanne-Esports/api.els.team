@@ -8,3 +8,4 @@
 import Event from '@ioc:Adonis/Core/Event'
 
 Event.on('new:user', 'SendEmailVerificationEmail.handleRegistration')
+Event.on('password:request', 'SendPasswordRequestEmail.method')
