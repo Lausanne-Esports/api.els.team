@@ -35,6 +35,14 @@
     "phc-argon2": "^1.0.10",
     "proxy-addr": "^2.0.6",
     "reflect-metadata": "^0.1.13",
-    "source-map-support": "^0.5.19"
+    "rehype-minify-whitespace": "^4.0.4",
+    "rehype-stringify": "^8.0.0",
+    "remark-external-links": "^6.1.0",
+    "remark-macro": "^1.0.7",
+    "remark-parse": "^8.0.3",
+    "remark-rehype": "^7.0.0",
+    "remark-squeeze-paragraphs": "^4.0.0",
+    "source-map-support": "^0.5.19",
+    "unified": "^9.1.0"
   }
 }

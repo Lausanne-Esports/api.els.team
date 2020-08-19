@@ -6,10 +6,11 @@
  */
 
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo, beforeSave } from '@ioc:Adonis/Lucid/Orm'
 import Language from './Language'
 import Article from './Article'
 import ArticleState from './ArticleState'
+import Markdownparser from 'App/Services/Markdown/Markdownparser'
 
 export default class ArticleTranslation extends BaseModel {
   @column({ isPrimary: true })
@@ -53,4 +54,10 @@ export default class ArticleTranslation extends BaseModel {
 
   @belongsTo(() => ArticleState, { foreignKey: 'stateId' })
   public state: BelongsTo<typeof ArticleState>
+
+  @beforeSave()
+  public static async computeHtml (translation: ArticleTranslation) {
+    const { contents } = await Markdownparser.renderToHtml(translation.body)
+    translation.html = contents.toString()
+  }
 }
