@@ -12,20 +12,18 @@
     </mj-attributes>
   </mj-head>
   <mj-body background-color="#f7f7f9">
-    <mj-wrapper background-color="#fff">
-      <mj-section>
-        <mj-column>
-          <mj-text>
-            <p>Un nouveau message a été reçu depuis le formulaire de contact.</p>
-            <p><strong>IP:</strong> {{ ip }}</p>
-          </mj-text>
-          <mj-divider border-width="1px" border-color="darkgrey" />
-          <mj-text font-weight="800">
-            <p style="margin: 13px 0 0;">{{ title }}</p>
-          </mj-text>
-          <mj-text>{{ message }}</mj-text>
-        </mj-column>
-      </mj-section>
-    </mj-wrapper>
+    <mj-section background-color="#fff">
+      <mj-column>
+        <mj-text>
+          <p>Un nouveau message a été reçu depuis le formulaire de contact.</p>
+          <p><strong>IP:</strong> {{ ip }}</p>
+        </mj-text>
+        <mj-divider border-width="1px" border-color="darkgrey" />
+        <mj-text font-weight="800">
+          <p style="margin: 13px 0 0;">{{ title }}</p>
+        </mj-text>
+        <mj-text>{{ message }}</mj-text>
+      </mj-column>
+    </mj-section>
   </mj-body>
 </mjml>
