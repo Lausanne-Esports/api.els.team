@@ -44,6 +44,6 @@
     "remark-rehype": "^7.0.0",
     "remark-squeeze-paragraphs": "^4.0.0",
     "source-map-support": "^0.5.19",
-    "unified": "^9.1.0"
+    "unified": "^9.2.0"
   }
 }
