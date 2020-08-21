@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@adonisjs/assembler": "^2.1.5",
+    "@types/mjml": "^4.0.4",
     "adonis-preset-ts": "^1.0.4",
     "csv": "^5.3.2",
     "eslint": "^7.7.0",
