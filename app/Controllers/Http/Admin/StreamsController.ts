@@ -14,7 +14,7 @@ import StreamValidator from 'App/Validators/StreamValidator'
 export default class StreamsController {
   public async index ({ response }: HttpContextContract) {
     const streams = await Stream.query().orderBy('username')
-    const twitchStreams = await Twitch.getStreams(streams.map(x => x.username))
+    const twitchStreams = await Twitch.getStreams(streams.map(x => x.twitchId))
     const serializedStreams = streams.map(channel => channel.toJSON()) as SerializedStream[]
 
     return response.json(StreamTransformer.transformCollection(serializedStreams, twitchStreams))

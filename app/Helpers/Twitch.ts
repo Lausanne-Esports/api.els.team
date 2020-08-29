@@ -52,9 +52,9 @@ class Twitch {
     return data.users[0]
   }
 
-  public async getStreams (channels: string[]) {
+  public async getStreams (twitchIds: number[]) {
     try {
-      const { streams }: { streams: TwitchStream[] } = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${channels.join()}&limit=100`, defaultOptions)
+      const { streams }: { streams: TwitchStream[] } = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${twitchIds.join()}&limit=100`, defaultOptions)
 
       return streams.reduce((streams: TwitchStream[], stream: TwitchStream) => {
         streams[stream.channel.name] = stream
