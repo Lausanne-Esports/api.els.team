@@ -1,3 +1,7 @@
-.env
 node_modules
-database/*.sqlite
+build
+coverage
+.vscode
+.DS_STORE
+.env
+tmp
