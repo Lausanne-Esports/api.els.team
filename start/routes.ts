@@ -7,7 +7,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => ({ version: '20200819', uptime: process.uptime() }))
+Route.get('/', async () => ({ version: '20201021', uptime: process.uptime() }))
 
 Route.post('contact', 'ContactController.store')
 Route.post('sessions', 'SessionsController.store')
