@@ -10,7 +10,6 @@
  * file.
  */
 
-import User from 'App/Models/User'
 import { AuthConfig } from '@ioc:Adonis/Addons/Auth'
 
 /*
@@ -24,7 +23,7 @@ import { AuthConfig } from '@ioc:Adonis/Addons/Auth'
 */
 const authConfig: AuthConfig = {
   guard: 'web',
-  list: {
+  guards: {
     /*
     |--------------------------------------------------------------------------
     | Web Guard
@@ -80,7 +79,7 @@ const authConfig: AuthConfig = {
         | The model to use for fetching or finding users
         |
         */
-        model: User,
+        model: () => import('App/Models/User'),
       },
     },
   },

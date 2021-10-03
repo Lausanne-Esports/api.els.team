@@ -18,7 +18,7 @@ export default class SendPasswordRequestEmail {
       },
       expiresIn: '30m',
     })
-    const verificationUrl = `${Env.get('APP_ADMIN_URL') as string}${signedUrl}`
+    const verificationUrl = `${Env.get('APP_ADMIN_URL')}${signedUrl}`
 
     try {
       await Mail.send((message) => {

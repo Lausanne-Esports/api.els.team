@@ -32,7 +32,7 @@ const hashConfig: HashConfig = {
   | free to change the default value
   |
   */
-  default: Env.get('HASH_DRIVER', 'argon') as 'argon',
+  default: Env.get('HASH_DRIVER', 'argon'),
 
   list: {
     /*

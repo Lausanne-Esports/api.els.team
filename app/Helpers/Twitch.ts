@@ -40,7 +40,7 @@ export interface Preview {
 const defaultOptions: Object = {
   headers: {
     'Accept': 'application/vnd.twitchtv.v5+json',
-    'Client-ID': Env.get('TWITCH_API_KEY') as string,
+    'Client-ID': Env.get('TWITCH_API_KEY'),
   },
   responseType: 'json',
 }

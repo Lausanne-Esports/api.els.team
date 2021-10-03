@@ -49,8 +49,13 @@ const mailConfig: MailConfig = {
     */
     smtp: {
       driver: 'smtp',
-      host: Env.get('SMTP_HOST') as string,
-      port: Env.get('SMTP_PORT') as string,
+      host: Env.get('SMTP_HOST'),
+      port: Env.get('SMTP_PORT'),
+      auth: {
+        user: Env.get('SMTP_USERNAME'),
+        pass: Env.get('SMTP_PASSWORD'),
+        type: 'login',
+      },
     },
 
     /*
@@ -69,9 +74,9 @@ const mailConfig: MailConfig = {
     ses: {
       driver: 'ses',
       apiVersion: '2010-12-01',
-      key: Env.get('SES_ACCESS_KEY') as string,
-      secret: Env.get('SES_ACCESS_SECRET') as string,
-      region: Env.get('SES_REGION') as string,
+      key: Env.get('SES_ACCESS_KEY'),
+      secret: Env.get('SES_ACCESS_SECRET'),
+      region: Env.get('SES_REGION'),
       sslEnabled: true,
       sendingRate: 10,
       maxConnections: 5,
@@ -88,8 +93,8 @@ const mailConfig: MailConfig = {
     mailgun: {
       driver: 'mailgun',
       baseUrl: 'https://api.mailgun.net/v3',
-      domain: Env.get('MAILGUN_DOMAIN') as string,
-      key: Env.get('MAILGUN_API_KEY') as string,
+      domain: Env.get('MAILGUN_DOMAIN'),
+      key: Env.get('MAILGUN_API_KEY'),
     },
 
     /*
@@ -103,7 +108,7 @@ const mailConfig: MailConfig = {
     sparkpost: {
       driver: 'sparkpost',
       baseUrl: 'https://api.sparkpost.com/api/v1',
-      key: Env.get('SPARKPOST_API_KEY') as string,
+      key: Env.get('SPARKPOST_API_KEY'),
     },
   },
 }
