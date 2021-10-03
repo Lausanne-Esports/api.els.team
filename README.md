@@ -6,7 +6,7 @@ This repository contains the source code of the Web Service that runs the websit
 
 ## Requirements
 
-This Web Service use [Adonis Framework](https://adonisjs.com/). It means you need to have a working installation of [Node.js](https://nodejs.org/en/) (>= 12.0).
+This Web Service use [Adonis Framework](https://adonisjs.com/). It means you need to have a working installation of [Node.js](https://nodejs.org/en/) (>= 14.15.4).
 
 ## Setup Instruction
 
