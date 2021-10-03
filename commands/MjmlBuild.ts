@@ -1,4 +1,4 @@
-import { BaseCommand } from '@adonisjs/ace'
+import { BaseCommand } from '@adonisjs/core/build/standalone'
 import { readFile, writeFile, readdir } from 'fs/promises'
 import mjml2html from 'mjml'
 

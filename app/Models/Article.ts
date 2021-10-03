@@ -49,6 +49,6 @@ export default class Article extends BaseModel {
   public translations: HasMany<typeof ArticleTranslation>
 
   public static published = scope((query) => {
-    query.where('published_at', '<', DateTime.utc().toSQLDate() as string)
+    query.where('published_at', '<', DateTime.utc().toSQLDate())
   })
 }

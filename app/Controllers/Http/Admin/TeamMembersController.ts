@@ -16,7 +16,7 @@ import OrderUpdateValidator from 'App/Validators/OrderUpdateValidator'
 export default class TeamMembersController {
   public async index ({ params, response }: HttpContextContract) {
     const team = await Team.findOrFail(params.team_id)
-    await team.preload('members', (query) => {
+    await team.load('members', (query) => {
       query.orderBy('order')
     })
 

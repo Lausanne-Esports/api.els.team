@@ -32,7 +32,7 @@ type HttpConfig = RequestConfig & ResponseConfig
 | be decrypted.
 |
 */
-export const appKey: string = Env.getOrFail('APP_KEY') as string
+export const appKey: string = Env.get('APP_KEY')
 
 /*
 |--------------------------------------------------------------------------
@@ -133,7 +133,7 @@ export const http: HttpConfig = {
   | to set the header explicitly.
   |
   */
-  forceContentNegotiationToJSON: true,
+  forceContentNegotiationTo: 'application/json',
 }
 
 /*
@@ -154,7 +154,7 @@ export const logger: LoggerConfig = {
   | reading the `name` property from the `package.json` file.
   |
   */
-  name: Env.get('APP_NAME') as string,
+  name: Env.get('APP_NAME'),
 
   /*
   |--------------------------------------------------------------------------
@@ -176,7 +176,7 @@ export const logger: LoggerConfig = {
   | at deployment level and not code level.
   |
   */
-  level: Env.get('LOG_LEVEL', 'info') as string,
+  level: Env.get('LOG_LEVEL', 'info'),
 
   /*
   |--------------------------------------------------------------------------

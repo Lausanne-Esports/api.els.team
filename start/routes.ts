@@ -5,9 +5,12 @@
  * @copyright Lausanne-Sport eSports - Romain Lanz & Valentin Kaelin
  */
 
+import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => ({ version: '20201021', uptime: process.uptime() }))
+
+Route.get('/health', async () => ({ report: await HealthCheck.getReport() }))
 
 Route.post('contact', 'ContactController.store')
 Route.post('sessions', 'SessionsController.store')

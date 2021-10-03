@@ -16,6 +16,17 @@ import { SessionConfig } from '@ioc:Adonis/Addons/Session'
 const sessionConfig: SessionConfig = {
   /*
   |--------------------------------------------------------------------------
+  | Enable/Disable sessions
+  |--------------------------------------------------------------------------
+  |
+  | Setting the following property to "false" will disable the session for the
+  | entire application
+  |
+  */
+  enabled: true,
+
+  /*
+  |--------------------------------------------------------------------------
   | Driver
   |--------------------------------------------------------------------------
   |
@@ -29,7 +40,7 @@ const sessionConfig: SessionConfig = {
   | Note: Switching drivers will make existing sessions invalid.
   |
   */
-  driver: Env.get('SESSION_DRIVER', 'cookie') as string,
+  driver: Env.get('SESSION_DRIVER', 'cookie'),
 
   /*
   |--------------------------------------------------------------------------
@@ -80,7 +91,7 @@ const sessionConfig: SessionConfig = {
   cookie: {
     path: '/',
     httpOnly: true,
-    domain: Env.get('COOKIE_DOMAIN', 'els.team') as string,
+    domain: Env.get('COOKIE_DOMAIN', 'els.team'),
     sameSite: true,
   },
 
