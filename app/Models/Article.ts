@@ -30,7 +30,10 @@ export default class Article extends BaseModel {
   @column()
   public featured: boolean
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, consume: (value) => {
+    return DateTime.fromJSDate(value).toFormat('yyyy-LL-dd HH:mm')
+  },
+  })
   public publishedAt: DateTime
 
   @column()
