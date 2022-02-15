@@ -35,7 +35,7 @@ export default class ArticleValidator {
     thumbnail: schema.string.optional(),
     featured_thumbnail: schema.string.optional(),
     published_at: schema.date.optional({
-      format: 'yyyy-MM-dd HH:mm',
+      format: 'yyyy-LL-dd HH:mm',
     }),
     category_id: schema.number([
       rules.exists({ table: 'article_categories', column: 'id' }),
