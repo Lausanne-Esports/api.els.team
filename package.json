@@ -29,7 +29,7 @@
     "@adonisjs/repl": "^3.1.6",
     "@adonisjs/session": "^6.1.2",
     "@adonisjs/view": "^6.1.1",
-    "got": "^11.8.2",
+    "got": "^11.8.5",
     "luxon": "^2.0.2",
     "pg": "^8.7.1",
     "phc-argon2": "^1.1.2",
