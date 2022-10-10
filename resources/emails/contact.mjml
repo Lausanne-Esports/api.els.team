@@ -15,6 +15,7 @@
     <mj-section background-color="#fff">
       <mj-column>
         <mj-text>
+          <p><strong>Auteur: </strong> {{ author }}</p>
           <p>Un nouveau message a été reçu depuis le formulaire de contact.</p>
           <p><strong>IP:</strong> {{ ip }}</p>
         </mj-text>

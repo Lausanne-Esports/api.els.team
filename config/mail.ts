@@ -23,7 +23,7 @@ const mailConfig: MailConfig = {
   | a mailer
   |
   */
-  mailer: 'mailgun',
+  mailer: 'smtp',
 
   /*
   |--------------------------------------------------------------------------

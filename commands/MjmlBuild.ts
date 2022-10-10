@@ -7,11 +7,11 @@ export default class MjmlBuild extends BaseCommand {
   public static description = 'Convert mjml emails to edge views'
 
   private async getEmailFiles () {
-    const files = await readdir(this.application.makePathFromCwd('resources/emails'))
+    const files = await readdir(this.application.makePath('resources/emails'))
 
     return files
       .filter(file => file.endsWith('.mjml'))
-      .map(file => `${this.application.makePathFromCwd('resources/emails/')}${file}`)
+      .map(file => `${this.application.makePath('resources/emails/')}${file}`)
   }
 
   private async compileFile (file: string) {
@@ -21,8 +21,8 @@ export default class MjmlBuild extends BaseCommand {
       minify: false,
     })
 
-    const baseName = file.replace(this.application.makePathFromCwd('resources/emails/'), '').replace('.mjml', '.edge')
-    await writeFile(this.application.makePathFromCwd(`resources/views/emails/${baseName}`), html)
+    const baseName = file.replace(this.application.makePath('resources/emails/'), '').replace('.mjml', '.edge')
+    await writeFile(this.application.makePath(`resources/views/emails/${baseName}`), html)
     this.logger.success(`Created email ${baseName}`)
   }
 

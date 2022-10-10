@@ -15,10 +15,11 @@ export default class ContactController {
 
     await Mail.sendLater((message) => {
       message
-        .from(email)
+        .from('contact@els.team')
         .to('contact@lausanne-esports.ch')
-        .subject(`[Contact] ${title}`)
+        .subject(`[Contact] ${title} from ${email}`)
         .htmlView('emails/contact', {
+          author: email,
           message: content,
           title,
           ip: request.ip(),
