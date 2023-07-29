@@ -39,4 +39,5 @@ export default Env.rules({
   SMTP_PASSWORD: Env.schema.string(),
 
   TWITCH_API_KEY: Env.schema.string(),
+  TWITCH_API_SECRET: Env.schema.string(),
 })
