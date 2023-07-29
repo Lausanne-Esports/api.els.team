@@ -14,7 +14,7 @@ import StreamValidator from 'App/Validators/StreamValidator'
 export default class StreamsController {
   public async index ({ response }: HttpContextContract) {
     const streams = await Stream.query().orderBy('username')
-    const twitchStreams = await Twitch.getStreams(streams.map(x => x.twitchId))
+    const twitchStreams = await Twitch.getStreams(streams.map(x => x.username))
     const serializedStreams = streams.map(channel => channel.toJSON()) as SerializedStream[]
 
     return response.json(StreamTransformer.transformCollection(serializedStreams, twitchStreams))
@@ -32,8 +32,8 @@ export default class StreamsController {
       const channel = await Twitch.getChannel(username)
 
       await Stream.create({
-        twitchId: Number(channel._id),
-        username: channel.name,
+        twitchId: Number(channel.id),
+        username: channel.login,
         displayName: channel.display_name,
       })
 
@@ -50,7 +50,7 @@ export default class StreamsController {
       const channel = await Twitch.getChannel(username)
 
       stream.merge({
-        twitchId: Number(channel._id),
+        twitchId: Number(channel.id),
         username: username,
         displayName: channel.display_name,
       })

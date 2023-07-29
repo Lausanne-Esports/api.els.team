@@ -13,7 +13,7 @@ import StreamTransformer, { SerializedStream } from 'App/Transformers/StreamTran
 export default class StreamsController {
   public async index ({ response }: HttpContextContract) {
     const streams = await Stream.query().orderBy('username')
-    const twitchStreams = await Twitch.getStreams(streams.map(x => x.twitchId))
+    const twitchStreams = await Twitch.getStreams(streams.map(x => x.username))
     const serializedStreams = streams.map(channel => channel.toJSON()) as SerializedStream[]
 
     return response.json(StreamTransformer.transformCollection(serializedStreams, twitchStreams))
@@ -21,7 +21,7 @@ export default class StreamsController {
 
   public async show ({ params, response }: HttpContextContract) {
     const stream = await Stream.findOrFail(params.id)
-    const twitchStream = await Twitch.getStreams([stream.twitchId])
+    const twitchStream = await Twitch.getStreams([stream.username])
     const serializedStream = stream.toJSON() as SerializedStream
 
     return response.json(StreamTransformer.transform(serializedStream, twitchStream))

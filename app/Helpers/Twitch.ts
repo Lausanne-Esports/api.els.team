@@ -14,50 +14,69 @@ export interface Streamers {
 }
 
 export interface TwitchUser {
-  _id: string;
+  id: string;
   display_name: string;
-  name: string;
+  login: string;
 }
 
 export interface TwitchStream {
-  channel: Channel;
-  game: string;
-  preview: Preview;
-  viewers: number;
-}
-
-export interface Channel {
-  name: string,
-  logo: string;
-  partner: boolean;
-  status: string;
-}
-
-export interface Preview {
-  large: string;
-}
-
-const defaultOptions: Object = {
-  headers: {
-    'Accept': 'application/vnd.twitchtv.v5+json',
-    'Client-ID': Env.get('TWITCH_API_KEY'),
-  },
-  responseType: 'json',
+  id: string;
+  user_login: string;
+  user_name: string;
+  game_name: string;
+  viewer_count: number;
+  thumbnail_url: string;
 }
 
 class Twitch {
-  public async getChannel (channel: string) {
-    const data: Streamers = await got.get(`https://api.twitch.tv/kraken/users?login=${channel}`, defaultOptions).json()
+  private async generateToken () {
+    const { access_token: token }: { access_token: string } = await got.post('https://id.twitch.tv/oauth2/token', {
+      searchParams: {
+        client_id: Env.get('TWITCH_API_KEY'),
+        client_secret: Env.get('TWITCH_API_SECRET'),
+        grant_type: 'client_credentials',
+      },
+      responseType: 'json',
+    }).json()
 
-    return data.users[0]
+    return token
   }
 
-  public async getStreams (twitchIds: number[]) {
-    try {
-      const { streams }: { streams: TwitchStream[] } = await this.getCached(`https://api.twitch.tv/kraken/streams/?channel=${twitchIds.join()}&limit=100`, defaultOptions)
+  private async defaultOptions () {
+    const accessToken = await this.generateToken()
 
-      return streams.reduce((streams: TwitchStream[], stream: TwitchStream) => {
-        streams[stream.channel.name] = stream
+    return {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Client-ID': Env.get('TWITCH_API_KEY'),
+      },
+      responseType: 'json',
+    } as Object
+  }
+
+  public async getChannel (channel: string) {
+    const accessToken = await this.generateToken()
+
+    const { data }: { data: TwitchUser[] } = await got.get(`https://api.twitch.tv/helix/users?login=${channel}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Client-ID': Env.get('TWITCH_API_KEY'),
+      },
+      responseType: 'json',
+    }).json()
+
+    console.log(data)
+    return data[0]
+  }
+
+  public async getStreams (usernames: string[]) {
+    try {
+      const options = await this.defaultOptions()
+      const { data }: { data: TwitchStream[] } =
+        await got.get(`https://api.twitch.tv/helix/streams?user_login=${usernames.join('&user_login=')}&limit=100`, options).json()
+
+      return data.reduce((streams: TwitchStream[], stream: TwitchStream) => {
+        streams[stream.user_login] = stream
         return streams
       }, [] as TwitchStream[])
     } catch (e) {
